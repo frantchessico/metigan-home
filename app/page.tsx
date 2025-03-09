@@ -21,7 +21,7 @@ export default function Home() {
       <SecuritySection />
       {/* <EmailDashboard/> */}
       {/* <IntegrateSection/> */}
-      <TestimonialsSection />
+      {/* <TestimonialsSection /> */}
       <PricingSection />
       <FaqSection />
       {/* <HeroSection/> */}
