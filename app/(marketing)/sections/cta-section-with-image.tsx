@@ -2,6 +2,7 @@ import { BorderBeam } from "@/components/magicui/border-beam"
 import { buttonVariants } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import Link from "next/link"
+import Image from 'next/image';
 
 export function CtaSectionWithImage() {
   return (
@@ -38,7 +39,7 @@ export function CtaSectionWithImage() {
             </div>
           </div>
           <div className="relative z-10 rounded-xl overflow-hidden transition-transform duration-300 hover:scale-[1.02] hover:shadow-xl hidden md:block">
-            <img
+            <Image
               src="https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
               alt="Team celebrating success"
               className="w-full h-auto object-cover rounded-xl shadow-lg"

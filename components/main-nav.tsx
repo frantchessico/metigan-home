@@ -1,50 +1,61 @@
 "use client"
 
-import { useRef } from "react"
+import { useRef, useState } from "react"
 import Link from "next/link"
 import { useTheme } from "next-themes"
 import { cn } from "@/lib/utils"
 import { useScrollPosition } from "@/hooks/use-background-contrast"
-
+import { motion } from "framer-motion"
 
 export function MainNav() {
   const navRef = useRef<HTMLDivElement>(null)
   const { theme } = useTheme()
   const scrollY = useScrollPosition()
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
 
-  // Determine if we're at the top section (assuming it has a dark background)
-  // You can adjust this threshold based on your layout
+  // Determine if we're at the top section
   const isAtTopSection = scrollY < 100
-
-  // In light mode, we adapt based on scroll position
-  // In dark mode, we use a consistent style
   const isDarkMode = theme === "dark"
 
   // Determine text color based on position and theme
   const textClass = isDarkMode
-    ? "text-foreground/70 hover:text-foreground" // Dark mode - always use theme colors
+    ? "text-foreground/80 hover:text-foreground"
     : isAtTopSection
-      ? "text-white/70 hover:text-white" // Light mode + top section (dark bg)
-      : "text-gray-700/90 hover:text-gray-900" // Light mode + scrolled (light bg)
+      ? "text-white/80 hover:text-white"
+      : "text-gray-700/90 hover:text-gray-900"
+
+  const navItems = [
+    { href: "/features", label: "Features" },
+    { href: "/pricing", label: "Pricing" },
+    { href: "/templates", label: "Templates" },
+    { href: "/forms", label: "Forms" },
+    { href: "/resources", label: "Resources" },
+  ]
 
   return (
     <div ref={navRef}>
-      <nav className="flex items-center space-x-6 text-sm">
-        <Link href="/features" className={cn(textClass, "transition-colors font-medium")}>
-          Features
-        </Link>
-        <Link href="/pricing" className={cn(textClass, "transition-colors font-medium")}>
-          Pricing
-        </Link>
-        <Link href="/templates" className={cn(textClass, "transition-colors font-medium")}>
-          Templates
-        </Link>
-        <Link href="/forms" className={cn(textClass, "transition-colors font-medium")}>
-          Forms
-        </Link>
-        <Link href="/resources" className={cn(textClass, "transition-colors font-medium")}>
-          Resources
-        </Link>
+      <nav className="flex items-center space-x-8 text-sm">
+        {navItems.map((item, index) => (
+          <Link
+            key={item.href}
+            href={item.href}
+            className="relative"
+            onMouseEnter={() => setHoveredIndex(index)}
+            onMouseLeave={() => setHoveredIndex(null)}
+          >
+            <span className={cn(textClass, "transition-colors font-medium relative z-10")}>{item.label}</span>
+            {hoveredIndex === index && (
+              <motion.span
+                className="absolute bottom-0 left-0 h-[2px] bg-purple-400 w-full"
+                layoutId="navIndicator"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+              />
+            )}
+          </Link>
+        ))}
       </nav>
     </div>
   )

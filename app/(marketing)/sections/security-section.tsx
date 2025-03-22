@@ -7,11 +7,12 @@ import ShineBorder from "@/components/magicui/shine-border"
 import { buttonVariants } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import Link from "next/link"
+import Image from "next/image"
 
 export function MarketingSection() {
   return (
-    <section className="container py-12 md:py-24 lg:py-32">
-      <div className="relative overflow-hidden rounded-lg px-6 py-16 sm:px-12 sm:py-24 md:py-32">
+    <section className="container py-8 sm:py-12 md:py-16 lg:py-24 xl:py-32 px-4 sm:px-6 md:px-8">
+      <div className="relative overflow-hidden rounded-lg px-4 sm:px-6 md:px-12 py-8 sm:py-16 md:py-24 lg:py-32">
         {/* Background with gradient */}
         <div className="absolute inset-0 bg-gradient-to-br from-black via-black to-[#894EEE]/70 -z-10" />
 
@@ -75,45 +76,51 @@ export function MarketingSection() {
         </div>
 
         <div className="relative z-10">
-          <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-center">
+          <div className="grid gap-8 lg:grid-cols-2 lg:gap-12 items-center">
             <div className="relative rounded-xl overflow-hidden order-2 lg:order-1 transition-transform duration-300 hover:scale-[1.02] hover:shadow-xl">
-              <img
+              <Image
                 src="https://images.pexels.com/photos/7688336/pexels-photo-7688336.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                 alt="Email marketing analytics dashboard"
                 className="w-full h-auto object-cover rounded-xl shadow-lg"
+                width={500}
+                height={500}
+                priority
               />
-              <BorderBeam size={200} className="opacity-70 hover:opacity-100 transition-opacity duration-300" />
+              <BorderBeam
+                size={150}
+                className="opacity-70 hover:opacity-100 transition-opacity duration-300 hidden sm:block"
+              />
             </div>
-            <div className="space-y-4 order-1 lg:order-2">
-              <div className="flex justify-center">
+            <div className="space-y-3 sm:space-y-4 order-1 lg:order-2">
+              <div className="flex justify-center lg:justify-start">
                 <ShineBorder
-                  className="text-center capitalize bg-white/10 backdrop-blur-sm px-6 py-2.5 text-lg font-medium rounded-full"
+                  className="text-center capitalize bg-white/10 backdrop-blur-sm px-4 sm:px-6 py-2 sm:py-2.5 text-sm sm:text-base md:text-lg font-medium rounded-full"
                   color={["#A07CFE", "#FE8FB5", "#FFBE7B"]}
                   duration={2.5}
                 >
                   <span className="inline-flex items-center gap-2">
                     <span>Email Marketing</span>
-                    <span className="text-xl">📈</span>
+                    <span className="text-lg sm:text-xl">📈</span>
                   </span>
                 </ShineBorder>
               </div>
-              <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl text-white">
+              <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-white text-center lg:text-left">
                 Boost your email campaign performance
               </h2>
-              <p className="text-white/80 text-lg">
+              <p className="text-white/80 text-base sm:text-lg text-center lg:text-left">
                 Metigan's powerful platform helps you create, schedule, and track email campaigns that drive engagement
                 and increase conversions with advanced personalization features.
               </p>
-              <p className="text-white/80 text-lg">
+              <p className="text-white/80 text-base sm:text-lg text-center lg:text-left">
                 Our analytics dashboard provides real-time insights into campaign performance, helping you optimize your
                 strategy and achieve better results with every send.
               </p>
-              <div className="pt-4">
+              <div className="pt-4 flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
                 <Link
                   href="/marketing"
                   className={cn(
                     buttonVariants({ size: "lg" }),
-                    "mr-4 transition-all duration-300 bg-white text-primary hover:bg-white/90 hover:shadow-md",
+                    "transition-all duration-300 bg-white text-primary hover:bg-white/90 hover:shadow-md w-full sm:w-auto",
                   )}
                 >
                   Start Marketing
@@ -122,7 +129,7 @@ export function MarketingSection() {
                   href="/analytics"
                   className={cn(
                     buttonVariants({ variant: "outline", size: "lg" }),
-                    "group transition-all duration-300 border-white text-white hover:bg-white/20",
+                    "group transition-all duration-300 border-white text-white hover:bg-white/20 w-full sm:w-auto",
                   )}
                 >
                   View Analytics <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />

@@ -106,7 +106,7 @@ export function HeroSection() {
         />
       </div>
 
-      <div className="container relative z-10 px-4 py-24 md:py-32 lg:py-40">
+      <div className="container relative z-10 px-4 py-16 sm:py-20 md:py-24 lg:py-32">
         <div className="mx-auto max-w-5xl">
           <div className="flex flex-col items-center text-center mb-12">
             {/* Animated badge */}
@@ -125,10 +125,10 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.2 }}
-              className="font-heading text-3xl sm:text-5xl md:text-6xl lg:text-7xl text-white leading-tight"
+              className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-white leading-tight"
             >
               Mass Email Delivery,
-              <br />
+              <br className="hidden sm:block" />
               <span className="bg-gradient-to-r from-purple-300 to-purple-100 bg-clip-text text-transparent">
                 Simplified for Everyone
               </span>
@@ -150,7 +150,7 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.6 }}
-              className="mt-10 w-full max-w-md"
+              className="mt-8 sm:mt-10 w-full max-w-md"
             >
               <form onSubmit={handleSubmitNewsletter}>
                 <div
@@ -159,11 +159,11 @@ export function HeroSection() {
                     isEmailFocused ? "bg-gradient-to-r from-purple-500 to-purple-300" : "bg-white/10",
                   )}
                 >
-                  <div className="relative flex items-center rounded-lg bg-black/80 backdrop-blur-sm">
+                  <div className="relative flex flex-col sm:flex-row items-center rounded-lg bg-black/80 backdrop-blur-sm">
                     <Input
                       type="email"
                       placeholder="Enter your email address"
-                      className="h-14 flex-1 border-0 bg-transparent pl-4 pr-20 text-white placeholder:text-white/60 focus:outline-none focus:ring-0"
+                      className="h-12 sm:h-14 w-full border-0 bg-transparent pl-4 pr-4 sm:pr-20 text-white placeholder:text-white/60 focus:outline-none focus:ring-0"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       onFocus={() => setIsEmailFocused(true)}
@@ -172,7 +172,7 @@ export function HeroSection() {
                     />
                     <Button
                       type="submit"
-                      className="absolute right-1 top-1/2 -translate-y-1/2 bg-gradient-to-r from-purple-600 to-purple-400 text-white hover:from-purple-500 hover:to-purple-300 h-12"
+                      className="mt-2 sm:mt-0 sm:absolute sm:right-1 sm:top-1/2 sm:-translate-y-1/2 w-full sm:w-auto bg-gradient-to-r from-purple-600 to-purple-400 text-white hover:from-purple-500 hover:to-purple-300 h-10 sm:h-12"
                       disabled={isSubmitting}
                     >
                       {isSubmitting ? (
@@ -201,18 +201,18 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.8 }}
-            className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+            className="mt-10 sm:mt-12 grid grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3"
           >
             {features.map((feature, index) => (
               <div
                 key={index}
-                className="rounded-xl border border-purple-500/20 bg-black/40 backdrop-blur-sm p-6 transition-all duration-300 hover:border-purple-500/40 hover:bg-black/50"
+                className="rounded-xl border border-purple-500/20 bg-black/40 backdrop-blur-sm p-4 sm:p-6 transition-all duration-300 hover:border-purple-500/40 hover:bg-black/50"
               >
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-purple-500/20">
-                  <feature.icon className="h-6 w-6 text-purple-300" />
+                <div className="mb-3 sm:mb-4 flex h-10 sm:h-12 w-10 sm:w-12 items-center justify-center rounded-lg bg-purple-500/20">
+                  <feature.icon className="h-5 w-5 sm:h-6 sm:w-6 text-purple-300" />
                 </div>
-                <h3 className="mb-2 text-lg font-medium text-white">{feature.title}</h3>
-                <p className="text-sm text-purple-100/80">{feature.description}</p>
+                <h3 className="mb-1 sm:mb-2 text-base sm:text-lg font-medium text-white">{feature.title}</h3>
+                <p className="text-xs sm:text-sm text-purple-100/80">{feature.description}</p>
               </div>
             ))}
           </motion.div>
@@ -222,12 +222,12 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 1 }}
-            className="mt-16 flex flex-wrap justify-center gap-x-12 gap-y-6 text-center"
+            className="mt-12 sm:mt-16 grid grid-cols-2 sm:flex sm:flex-wrap justify-center gap-x-8 sm:gap-x-12 gap-y-6 text-center"
           >
             {stats.map((stat, index) => (
               <div key={index} className="flex flex-col items-center">
-                <div className="text-3xl font-bold text-white">{stat.value}</div>
-                <div className="mt-1 text-sm text-purple-200/70">{stat.label}</div>
+                <div className="text-2xl sm:text-3xl font-bold text-white">{stat.value}</div>
+                <div className="mt-1 text-xs sm:text-sm text-purple-200/70">{stat.label}</div>
               </div>
             ))}
           </motion.div>

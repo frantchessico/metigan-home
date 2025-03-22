@@ -18,6 +18,7 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog"
 import { templates } from "./templates"
+import Image from 'next/image';
 
 export default function FormTemplatesPage() {
   const [searchQuery, setSearchQuery] = useState("")
@@ -272,7 +273,7 @@ export default function FormTemplatesPage() {
                     className="bg-black/40 backdrop-blur-sm border-purple-500/20 hover:border-purple-500/40 transition-all duration-300 overflow-hidden group"
                   >
                     <div className="relative overflow-hidden">
-                      <img
+                      <Image
                         src={template.coverImage || "/placeholder.svg?height=200&width=400"}
                         alt={template.title}
                         className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105"
@@ -416,7 +417,7 @@ export default function FormTemplatesPage() {
               <div className="mx-auto max-w-[600px] bg-white p-6 rounded-lg shadow-sm">
                 {previewTemplate?.coverImage && (
                   <div className="mb-6">
-                    <img
+                    <Image
                       src={previewTemplate.coverImage || "/placeholder.svg"}
                       alt={previewTemplate.title}
                       className="w-full h-48 object-cover rounded-lg"

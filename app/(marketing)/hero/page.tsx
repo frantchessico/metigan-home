@@ -8,6 +8,7 @@ import { Companies } from "@/components/social-proof"
 import { buttonVariants } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import Link from "next/link"
+import Image from "next/image"
 
 function HeroPage() {
   const [scrolled, setScrolled] = useState(false)
@@ -88,11 +89,16 @@ function HeroPage() {
         </div>
 
         {/* Original Hero Content */}
-        <section className="relative space-y-6 pb-8 pt-6 md:pb-12 md:pt-10 lg:py-20 z-10">
-          <div className="container flex max-w-[64rem] flex-col items-center gap-4 text-center sm:mb-10 lg:mb-20 md:sm-20">
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+        <section className="relative space-y-4 sm:space-y-6 pb-6 pt-4 md:pb-12 md:pt-10 lg:py-20 z-10">
+          <div className="container flex max-w-[64rem] flex-col items-center gap-3 sm:gap-4 text-center sm:mb-8 lg:mb-20 md:mb-16">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="relative h-14 flex items-center justify-center"
+            >
               <ShineBorder
-                className="text-center capitalize bg-muted px-4 py-1.5 text-lg font-medium absolute"
+                className="text-center capitalize bg-muted px-3 sm:px-4 py-1 sm:py-1.5 text-sm sm:text-lg font-medium absolute"
                 color={["#A07CFE", "#FE8FB5", "#FFBE7B"]}
               >
                 Introducing QuotesAI ✨
@@ -100,20 +106,20 @@ function HeroPage() {
             </motion.div>
 
             <motion.h1
-              className="font-heading text-3xl sm:text-5xl md:text-6xl lg:text-7xl mt-20 text-white"
+              className="font-heading text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl mt-10 sm:mt-16 md:mt-20 text-white"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.2 }}
             >
               Smarter Email Delivery,
-              <br />
+              <br className="hidden sm:block" />
               <span className="bg-gradient-to-r from-purple-300 to-purple-100 bg-clip-text text-transparent">
                 More Control for You
               </span>
             </motion.h1>
 
             <motion.p
-              className="max-w-[42rem] leading-normal text-purple-100 sm:text-xl sm:leading-8"
+              className="max-w-[42rem] leading-normal text-sm sm:text-base md:text-xl text-purple-100 sm:leading-8"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.4 }}
@@ -122,7 +128,7 @@ function HeroPage() {
             </motion.p>
 
             <motion.div
-              className="space-x-4"
+              className="flex flex-col sm:flex-row gap-3 sm:space-x-4 w-full sm:w-auto"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.6 }}
@@ -131,7 +137,7 @@ function HeroPage() {
                 href="/login"
                 className={cn(
                   buttonVariants({ size: "lg" }),
-                  "bg-gradient-to-r from-purple-600 to-purple-400 hover:from-purple-500 hover:to-purple-300",
+                  "bg-gradient-to-r from-purple-600 to-purple-400 hover:from-purple-500 hover:to-purple-300 w-full sm:w-auto",
                 )}
               >
                 Get Started
@@ -140,7 +146,7 @@ function HeroPage() {
                 href="/#features"
                 className={cn(
                   buttonVariants({ variant: "outline", size: "lg" }),
-                  "mt-sm-2 border-purple-400/30 text-purple-100 hover:bg-purple-500/10",
+                  "border-purple-400/30 text-purple-100 hover:bg-purple-500/10 w-full sm:w-auto",
                 )}
               >
                 Let&apos;s Explore 👇🏻
@@ -149,33 +155,39 @@ function HeroPage() {
           </div>
 
           <motion.div
-            className="relative rounded-xl mx-auto justify-center flex flex-col items-center lg:max-w-[1000px] overflow-hidden md:overflow-auto lg:overflow-auto"
+            className="relative rounded-xl mx-auto justify-center flex flex-col items-center w-full px-4 sm:px-6 md:px-8 lg:px-0 lg:max-w-[1000px]"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.8 }}
           >
-            <img
-              src="/darkoutput.png"
-              alt="Hero Image"
-              className="hidden lg:max-w-[1000px] rounded-[inherit] border border-purple-500/20 object-contain shadow-lg dark:block overflow-hidden md:overflow-auto lg:overflow-auto"
-            />
-            <img
-              src="/lightoutput.png"
-              alt="Hero Image"
-              className="block lg:max-w-[1000px] rounded-[inherit] border border-purple-500/20 object-contain shadow-lg dark:hidden overflow-hidden md:overflow-auto lg:overflow-auto"
-            />
-            <BorderBeam size={250} />
+            <div className="w-full overflow-hidden rounded-xl border border-purple-500/20 shadow-lg">
+              <Image
+                src="/darkoutput.png"
+                alt="Hero Image"
+                width={1100}
+                height={1100}
+                className="hidden dark:block w-full h-auto object-contain"
+              />
+              <Image
+                src="/lightoutput.png"
+                alt="Hero Image"
+                width={1100}
+                height={1100}
+                className="block dark:hidden w-full h-auto object-contain"
+              />
+            </div>
+            <BorderBeam size={200} className="hidden sm:block" />
           </motion.div>
         </section>
 
         <Companies />
 
-        <section id="open-source" className="container py-8 md:py-12 lg:py-24 relative z-10">
-          <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center">
-            <h2 className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-6xl text-white">
-            Metigan: Email. Fast & Reliable
+        <section id="open-source" className="container py-8 md:py-12 lg:py-24 relative z-10 px-4 sm:px-6">
+          <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-3 sm:gap-4 text-center">
+            <h2 className="font-heading text-2xl sm:text-3xl md:text-5xl lg:text-6xl leading-[1.1] text-white">
+              Metigan: Email. Fast & Reliable
             </h2>
-            <p className="max-w-[85%] leading-normal text-purple-100 sm:text-lg sm:leading-7">
+            <p className="max-w-[95%] sm:max-w-[85%] leading-normal text-sm sm:text-base md:text-lg text-purple-100 sm:leading-7">
               Let&apos;s Try Now -{" "}
               <a href="/login" className="underline underline-offset-4 text-purple-300 hover:text-purple-200">
                 Get Started

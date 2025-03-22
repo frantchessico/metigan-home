@@ -5,6 +5,7 @@ import { Mail, Github, Download } from "lucide-react"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
+import Image from 'next/image';
 
 const technologies = [
   { name: "Node.js", icon: "/placeholder.svg?height=24&width=24" },
@@ -227,7 +228,7 @@ export  function IntegrateSection() {
           {technologies.map((tech) => (
             <motion.div key={tech.name} className="flex flex-col items-center gap-2" whileHover={{ scale: 1.1 }}>
               <div className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center">
-                <img src={tech.icon || "/placeholder.svg"} alt={tech.name} className="w-6 h-6" />
+                <Image src={tech.icon || "/placeholder.svg"} alt={tech.name} className="w-6 h-6" />
               </div>
               <span className="text-xs text-gray-500">{tech.name}</span>
             </motion.div>

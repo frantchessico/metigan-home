@@ -7,6 +7,7 @@ import { useEffect, useRef } from "react"
 import { InvertedBackgroundSection } from "./inverted-background-section"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger"
+import Image from 'next/image';
 
 export function OnboardingSteps() {
   const sectionRef = useRef<HTMLElement>(null)
@@ -178,10 +179,11 @@ export function OnboardingSteps() {
                     index % 2 === 1 ? "md:order-first" : "",
                   )}
                 >
-                  <img
+                  <Image
                     src={step.image || "/placeholder.svg"}
                     alt={step.title}
                     className="w-full h-auto object-cover rounded-xl shadow-lg"
+                    width={500} height={500}
                   />
                   {/* Connection dot */}
                   <div className="absolute left-1/2 top-1/2 w-6 h-6 -ml-3 -mt-3 rounded-full bg-primary shadow-lg hidden md:block"></div>

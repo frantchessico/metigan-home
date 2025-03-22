@@ -6,6 +6,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { motion } from "framer-motion"
+import Image from 'next/image';
 
 export function FeaturesWithImages() {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null)
@@ -45,10 +46,13 @@ export function FeaturesWithImages() {
 
               <div className="relative h-56 overflow-hidden rounded-t-lg">
                 <div className="absolute inset-0 bg-black/20 z-10 group-hover:bg-black/10 transition-colors duration-300" />
-                <img
-                  src={feature.image || "/placeholder.svg"}
+                <Image
+                  src={feature.image }
                   alt={feature.title}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+
+                  width={500} 
+                  height={500}
                 />
                 <div className="absolute top-4 left-4 z-20">
                   <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-background/80 backdrop-blur-sm shadow-md">

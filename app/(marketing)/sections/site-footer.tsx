@@ -1,6 +1,7 @@
 "\"use client"
 
 import { Mail, Phone, MapPin, LinkIcon } from "lucide-react"
+import Image from 'next/image';
 
 export function SiteFooter() {
   return (
@@ -9,7 +10,7 @@ export function SiteFooter() {
         {/* Company Info */}
         <div>
         <div className="flex items-center gap-0.89">
-          <img
+          <Image
             src="https://res.cloudinary.com/dwsk5thfo/image/upload/v1741872069/l0vobcpkkk2koni3rq8g.svg"
             alt="Metigan Logo"
             className="h-8 w-auto"

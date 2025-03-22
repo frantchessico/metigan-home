@@ -24,6 +24,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { useRouter } from "next/navigation"
+import Image from 'next/image';
 
 export default function FeaturesPage() {
   const [activeTab, setActiveTab] = useState("all")
@@ -221,7 +222,7 @@ export default function FeaturesPage() {
                   </Button>
                 </div>
                 <div className="rounded-xl overflow-hidden border border-purple-500/20">
-                  <img
+                  <Image
                     src="https://images.pexels.com/photos/5256078/pexels-photo-5256078.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                     alt="Drag & Drop Template Builder"
                     className="w-full h-auto"
@@ -325,7 +326,7 @@ export default function FeaturesPage() {
                   <CardHeader>
                     <div className="flex items-center gap-4">
                       <div className="h-12 w-12 rounded-full overflow-hidden">
-                        <img
+                        <Image
                           src={testimonial.avatar || "/placeholder.svg?height=48&width=48"}
                           alt={testimonial.name}
                           className="h-full w-full object-cover"

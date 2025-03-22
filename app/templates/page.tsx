@@ -18,6 +18,7 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog"
 import { defaultTemplates } from "./default-templates"
+import Image from 'next/image';
 
 export default function TemplatesPage() {
   const [searchQuery, setSearchQuery] = useState("")
@@ -231,7 +232,7 @@ export default function TemplatesPage() {
                     className="bg-black/40 backdrop-blur-sm border-purple-500/20 hover:border-purple-500/40 transition-all duration-300 overflow-hidden group"
                   >
                     <div className="relative overflow-hidden">
-                      <img
+                      <Image
                         src={template.thumbnail || "/placeholder.svg"}
                         alt={template.name}
                         className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105"
@@ -388,7 +389,7 @@ export default function TemplatesPage() {
               <div className="mx-auto max-w-[600px] bg-white">
                 {/* Email Header */}
                 <div className="text-center py-6 border-b border-gray-200">
-                  <img src="/placeholder.svg?height=50&width=150" alt="Company Logo" className="h-10 mx-auto mb-4" />
+                  <Image src="/placeholder.svg?height=50&width=150" alt="Company Logo" className="h-10 mx-auto mb-4" />
                 </div>
 
                 {/* Email Content - This would be the actual template content */}
@@ -398,7 +399,7 @@ export default function TemplatesPage() {
                   {previewTemplate?.id.includes("welcome") && (
                     <div>
                       <h1 className="text-2xl font-bold text-center mb-6">Welcome to Our Platform!</h1>
-                      <img
+                      <Image
                         src={previewTemplate?.thumbnail || "/placeholder.svg"}
                         alt="Welcome"
                         className="w-full h-48 object-cover rounded-lg mb-6"
@@ -426,7 +427,7 @@ export default function TemplatesPage() {
                   {previewTemplate?.id.includes("newsletter") && (
                     <div>
                       <h1 className="text-2xl font-bold text-center mb-6">This Month's Newsletter</h1>
-                      <img
+                      <Image
                         src={previewTemplate?.thumbnail || "/placeholder.svg"}
                         alt="Newsletter"
                         className="w-full h-48 object-cover rounded-lg mb-6"
@@ -456,7 +457,7 @@ export default function TemplatesPage() {
                     <div>
                       <h1 className="text-2xl font-bold text-center mb-2">SPECIAL OFFER</h1>
                       <h2 className="text-xl text-center text-purple-600 mb-6">30% OFF EVERYTHING</h2>
-                      <img
+                      <Image
                         src={previewTemplate?.thumbnail || "/placeholder.svg"}
                         alt="Promotion"
                         className="w-full h-48 object-cover rounded-lg mb-6"
@@ -466,7 +467,7 @@ export default function TemplatesPage() {
                       </p>
                       <div className="grid grid-cols-2 gap-4 my-6">
                         <div className="border rounded-lg p-3 text-center">
-                          <img
+                          <Image
                             src="/placeholder.svg?height=100&width=100"
                             alt="Product 1"
                             className="w-full h-32 object-cover rounded-lg mb-2"
@@ -476,7 +477,7 @@ export default function TemplatesPage() {
                           <p className="text-sm text-gray-600">From $149.90</p>
                         </div>
                         <div className="border rounded-lg p-3 text-center">
-                          <img
+                          <Image
                             src="/placeholder.svg?height=100&width=100"
                             alt="Product 2"
                             className="w-full h-32 object-cover rounded-lg mb-2"
@@ -497,7 +498,7 @@ export default function TemplatesPage() {
                   {previewTemplate?.id.includes("event") && (
                     <div>
                       <h1 className="text-2xl font-bold text-center mb-6">YOU'RE INVITED</h1>
-                      <img
+                      <Image
                         src={previewTemplate?.thumbnail || "/placeholder.svg"}
                         alt="Event"
                         className="w-full h-48 object-cover rounded-lg mb-6"
@@ -547,7 +548,7 @@ export default function TemplatesPage() {
                         </p>
                         <hr className="my-3" />
                         <div className="flex items-center mb-3">
-                          <img
+                          <Image
                             src="/placeholder.svg?height=50&width=50"
                             alt="Product"
                             className="w-12 h-12 object-cover rounded mr-3"
@@ -577,7 +578,7 @@ export default function TemplatesPage() {
                   {previewTemplate?.id.includes("feedback") && (
                     <div>
                       <h1 className="text-2xl font-bold text-center mb-6">How Was Your Experience?</h1>
-                      <img
+                      <Image
                         src={previewTemplate?.thumbnail || "/placeholder.svg"}
                         alt="Feedback"
                         className="w-full h-48 object-cover rounded-lg mb-6"
