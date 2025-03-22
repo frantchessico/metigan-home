@@ -1,16 +1,21 @@
 "use client"
 
+import type React from "react"
+
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
-import { ArrowRight, Mail, CheckCircle, Zap, Clock, BarChart3 } from "lucide-react"
+import { ArrowRight, Mail, CheckCircle, Zap, Clock, BarChart3, Loader2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
+import { sendNewsletterEmail } from "@/app/email/metigan"
+import { toast } from "sonner"
 
 export function HeroSection() {
   const [email, setEmail] = useState("")
   const [isEmailFocused, setIsEmailFocused] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,6 +25,38 @@ export function HeroSection() {
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
+
+  const validateEmail = (email: string) => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    return regex.test(email)
+  }
+
+  const handleSubmitNewsletter = async (e: React.FormEvent) => {
+    e.preventDefault()
+
+    if (!email) {
+      toast.error("Please enter your email address")
+      return
+    }
+
+    if (!validateEmail(email)) {
+      toast.error("Please enter a valid email address")
+      return
+    }
+
+    setIsSubmitting(true)
+
+    try {
+      await sendNewsletterEmail(email)
+      toast.success("Thank you for subscribing to our newsletter!")
+      setEmail("")
+    } catch (error) {
+      toast.error("Failed to subscribe. Please try again later.")
+      console.error("Newsletter subscription error:", error)
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
 
   return (
     <section className="relative w-full overflow-hidden">
@@ -115,29 +152,47 @@ export function HeroSection() {
               transition={{ duration: 0.7, delay: 0.6 }}
               className="mt-10 w-full max-w-md"
             >
-              <div
-                className={cn(
-                  "relative rounded-xl p-1 transition-all duration-300",
-                  isEmailFocused ? "bg-gradient-to-r from-purple-500 to-purple-300" : "bg-white/10",
-                )}
-              >
-                <div className="relative flex items-center rounded-lg bg-black/80 backdrop-blur-sm">
-                  <Input
-                    type="email"
-                    placeholder="Enter your email address"
-                    className="h-14 flex-1 border-0 bg-transparent pl-4 pr-20 text-white placeholder:text-white/60 focus:outline-none focus:ring-0"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    onFocus={() => setIsEmailFocused(true)}
-                    onBlur={() => setIsEmailFocused(false)}
-                  />
-                  <Button className="absolute right-1 top-1/2 -translate-y-1/2 bg-gradient-to-r from-purple-600 to-purple-400 text-white hover:from-purple-500 hover:to-purple-300 h-12">
-                    <span className="mr-2">Try Free</span>
-                    <ArrowRight className="h-4 w-4" />
-                  </Button>
+              <form onSubmit={handleSubmitNewsletter}>
+                <div
+                  className={cn(
+                    "relative rounded-xl p-1 transition-all duration-300",
+                    isEmailFocused ? "bg-gradient-to-r from-purple-500 to-purple-300" : "bg-white/10",
+                  )}
+                >
+                  <div className="relative flex items-center rounded-lg bg-black/80 backdrop-blur-sm">
+                    <Input
+                      type="email"
+                      placeholder="Enter your email address"
+                      className="h-14 flex-1 border-0 bg-transparent pl-4 pr-20 text-white placeholder:text-white/60 focus:outline-none focus:ring-0"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      onFocus={() => setIsEmailFocused(true)}
+                      onBlur={() => setIsEmailFocused(false)}
+                      disabled={isSubmitting}
+                    />
+                    <Button
+                      type="submit"
+                      className="absolute right-1 top-1/2 -translate-y-1/2 bg-gradient-to-r from-purple-600 to-purple-400 text-white hover:from-purple-500 hover:to-purple-300 h-12"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? (
+                        <>
+                          <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                          <span>Subscribing...</span>
+                        </>
+                      ) : (
+                        <>
+                          <span className="mr-2">Subscribe Now</span>
+                          <ArrowRight className="h-4 w-4" />
+                        </>
+                      )}
+                    </Button>
+                  </div>
                 </div>
-              </div>
-              <p className="mt-3 text-center text-sm text-purple-200/70">No credit card required. 14-day free trial.</p>
+              </form>
+              <p className="mt-3 text-center text-sm text-purple-200/70">
+                Stay ahead! Subscribe to our newsletter for exclusive updates.
+              </p>
             </motion.div>
           </div>
 

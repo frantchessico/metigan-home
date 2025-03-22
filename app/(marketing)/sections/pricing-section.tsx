@@ -11,7 +11,7 @@ export function PricingSection() {
         <h3 className="text-center text-sm font-semibold text-gray-500 pb-2">PRICING</h3>
         <h2 className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-5xl">Simple, Transparent Pricing</h2>
         <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
-          Choose the plan that works best for your needs
+          Choose the perfect plan for your email marketing needs. Scale as you grow with our flexible pricing options.
         </p>
       </div>
 
@@ -66,7 +66,7 @@ export function PricingSection() {
                     : "hover:bg-primary/10 hover:text-primary hover:border-primary",
                 )}
               >
-                Get Started
+                {plan.name === "Business" ? "Contact Sales" : "Get Started"}
               </Button>
             </CardFooter>
           </Card>
@@ -78,45 +78,49 @@ export function PricingSection() {
 
 const pricingPlans = [
   {
-    name: "Basic",
-    description: "Essential features for small teams",
-    price: 9,
+    name: "Free",
+    description: "For personal projects and small businesses",
+    price: 0,
     featured: false,
     features: [
-      "Up to 1,000 emails per month",
-      "Basic tracking",
-      "Email scheduling",
-      "5 email templates",
+      "3,000 emails per month",
+      "5,000 contacts",
+      "1 Domain",
+      "No daily limit",
+      "Basic templates",
       "Email support",
     ],
   },
   {
-    name: "Standard",
-    description: "Perfect for growing businesses",
-    price: 29,
+    name: "Pro",
+    description: "For growing businesses with advanced needs",
+    price: 16,
     featured: true,
     features: [
-      "Up to 10,000 emails per month",
-      "Advanced tracking & analytics",
-      "Email scheduling",
-      "Unlimited templates",
-      "Integration specialist",
-      "Priority support",
+      "65,000 emails per month",
+      "85,000 contacts",
+      "15 Domains",
+      "35 Senders",
+      "API access",
+      "No daily limit",
+      "Detailed analytics",
+      "24/7 phone support",
     ],
   },
   {
-    name: "Premium",
-    description: "For enterprises with advanced needs",
-    price: 79,
+    name: "Business",
+    description: "For large businesses with high volume needs",
+    price: 150,
     featured: false,
     features: [
       "Unlimited emails",
-      "Advanced tracking & analytics",
-      "Email scheduling",
-      "Unlimited templates",
-      "Integration specialist",
-      "24/7 dedicated support",
-      "Custom integrations",
+      "Unlimited contacts",
+      "1500 Domains",
+      "2500 Senders",
+      "Detailed analytics",
+      "API access",
+      "No daily limit",
+      "Priority email support",
     ],
   },
 ]

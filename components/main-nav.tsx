@@ -39,6 +39,9 @@ export function MainNav() {
         <Link href="/templates" className={cn(textClass, "transition-colors font-medium")}>
           Templates
         </Link>
+        <Link href="/forms" className={cn(textClass, "transition-colors font-medium")}>
+          Forms
+        </Link>
         <Link href="/resources" className={cn(textClass, "transition-colors font-medium")}>
           Resources
         </Link>

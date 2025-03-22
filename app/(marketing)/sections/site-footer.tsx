@@ -8,7 +8,14 @@ export function SiteFooter() {
       <div className="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         {/* Company Info */}
         <div>
-          <h4 className="text-lg font-semibold mb-4">Metigan</h4>
+        <div className="flex items-center gap-0.89">
+          <img
+            src="https://res.cloudinary.com/dwsk5thfo/image/upload/v1741872069/l0vobcpkkk2koni3rq8g.svg"
+            alt="Metigan Logo"
+            className="h-8 w-auto"
+          />
+          <span className="text-xl font-bold text-white">metigan</span>
+        </div>
           <p className="text-sm text-purple-100/70">
             Your go-to platform for mass email delivery. Simplifying email marketing for everyone.
           </p>

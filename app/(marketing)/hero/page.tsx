@@ -173,7 +173,7 @@ function HeroPage() {
         <section id="open-source" className="container py-8 md:py-12 lg:py-24 relative z-10">
           <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center">
             <h2 className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-6xl text-white">
-              QuotesAI - Unlock the Wisdom
+            Metigan: Email. Fast & Reliable
             </h2>
             <p className="max-w-[85%] leading-normal text-purple-100 sm:text-lg sm:leading-7">
               Let&apos;s Try Now -{" "}

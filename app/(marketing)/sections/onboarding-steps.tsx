@@ -148,7 +148,7 @@ export function OnboardingSteps() {
           <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary/80 to-primary/20 hidden md:block connection-line"></div>
 
           {steps.map((step, index) => (
-            <div key={index} className="relative mb-16 last:mb-0" ref={(el) => (stepsRefs.current[index] = el)}>
+            <div key={index} className="relative mb-16 last:mb-0" ref={(el: any) => (stepsRefs.current[index] = el)}>
               <div className={cn("grid md:grid-cols-2 gap-8 items-center", index % 2 === 1 ? "md:rtl" : "")}>
                 <div
                   className={cn(

@@ -110,7 +110,7 @@ const features = [
     description: "Send emails at the perfect time",
     icon: Calendar,
     image:
-      "https://images.pexels.com/photos/1181406/pexels-photo-1181406.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://res.cloudinary.com/dwsk5thfo/image/upload/v1742631874/nzwxgm6tp3vkypfvqdfa.jpg",
     benefits: [
       "Schedule emails for optimal delivery times",
       "Time zone intelligent sending",
@@ -123,7 +123,7 @@ const features = [
     description: "Gain insights from your email campaigns",
     icon: BarChart3,
     image:
-      "https://images.pexels.com/photos/7947541/pexels-photo-7947541.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://res.cloudinary.com/dwsk5thfo/image/upload/v1742631908/f36q4nmk2fx3fyaacsnb.jpg",
     benefits: [
       "Real-time open and click tracking",
       "Engagement heat maps",

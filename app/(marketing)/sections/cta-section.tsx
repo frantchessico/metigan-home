@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
 import Link from "next/link"
 import { Mail, ArrowRight, CheckCircle2 } from "lucide-react"
+import { sendNewsletterEmail } from "@/app/email/metigan"
 
 export function CtaSection() {
   const [email, setEmail] = useState("")
@@ -44,11 +45,18 @@ export function CtaSection() {
     setIsSubmitting(true)
 
     // Simulate API call
-    setTimeout(() => {
+
+    try {
+      await sendNewsletterEmail(email)
       setIsSubmitting(false)
       setIsSubscribed(true)
-      // In a real implementation, you would call your newsletter API here
-    }, 1500)
+    } catch (error) {
+      setIsSubmitting(false)
+      setIsSubscribed(false)
+    }
+   
+
+    
   }
 
   return (
@@ -229,23 +237,15 @@ export function CtaSection() {
             transition={{ duration: 0.7, delay: 0.6 }}
           >
             <Link
-              href="/signup"
+              href="https://home.metigan.com"
               className={cn(
                 buttonVariants({ size: "lg" }),
                 "bg-white text-primary hover:bg-white/90 hover:shadow-md transition-all duration-300 hover:scale-105",
               )}
             >
-              Start Free Trial
+              Start For Free
             </Link>
-            <Link
-              href="/demo"
-              className={cn(
-                buttonVariants({ variant: "outline", size: "lg" }),
-                "border-white text-white hover:bg-white/20 transition-all duration-300 hover:scale-105",
-              )}
-            >
-              Request Demo
-            </Link>
+           
           </motion.div>
         </div>
         <BorderBeam size={400} className="opacity-40 hover:opacity-60 transition-opacity duration-700" />

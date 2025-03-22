@@ -1,12 +1,10 @@
 const companies = [
-    "Google",
-    "Microsoft",
-    "Amazon",
-    "Netflix",
-    "YouTube",
-    "Instagram",
-    "Uber",
-    "Spotify",
+    "https://res.cloudinary.com/dwsk5thfo/image/upload/v1742515316/wsnfs9w3kghv3gd7ohel.svg",
+    "https://res.cloudinary.com/dwsk5thfo/image/upload/v1742516907/yce8dxgdw2rn2ms7o4ma.png",
+    "https://res.cloudinary.com/dwsk5thfo/image/upload/v1742518376/kxcqwwmftxxku0ydwbbe.svg",
+    "https://res.cloudinary.com/dwsk5thfo/image/upload/v1742517941/zsvng26vxhk5wxmsnfiv.svg",
+    "https://res.cloudinary.com/dwsk5thfo/image/upload/v1742518582/fc2yjwmlnxew80ddwfsa.svg"
+    
   ];
   
   export function Companies() {
@@ -18,12 +16,12 @@ const companies = [
               TRUSTED BY LEADING TEAMS
             </h3>
             <div className="relative mt-6">
-              <div className="grid grid-cols-2 place-items-center gap-2 md:grid-cols-4 xl:grid-cols-8 xl:gap-4">
+              <div className="grid grid-cols-2 place-items-center gap-2 md:grid-cols-4 xl:grid-cols-5 xl:gap-4">
                 {companies.map((logo, idx) => (
                   <img
                     key={idx}
-                    src={`https://cdn.magicui.design/companies/${logo}.svg`}
-                    className="h-10 w-40 px-2 dark:brightness-0 dark:invert"
+                    src={logo}
+                    className="h-30 w-40 px-2 dark:brightness-0 dark:invert"
                     alt={logo}
                   />
                 ))}

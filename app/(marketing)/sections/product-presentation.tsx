@@ -27,30 +27,29 @@ export function ProductPresentation() {
                 duration={2.5}
               >
                 <span className="inline-flex items-center gap-2">
-                  <span>Personalized Experience</span>
-                  <span className="text-xl">✨</span>
+                  <span>Boost Your Email Marketing</span>
+                  <span className="text-xl">🚀</span>
                 </span>
               </ShineBorder>
             </div>
             <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl text-white">
-              Comece facilmente com uma{" "}
+              Engage your audience with{" "}
               <span className="bg-gradient-to-r from-purple-300 to-purple-100 bg-clip-text text-transparent">
-                apresentação de produto personalizada
+                Metigan’s powerful email automation
               </span>
             </h2>
             <p className="text-purple-100 text-lg">
-              Um especialista de integração está aqui para ajudar você a começar com confiança — está incluído nos
-              planos Standard e Premium.*
+              Automate, personalize, and track your emails effortlessly. With Metigan, you optimize engagement while saving time.
             </p>
             <div className="pt-4">
               <Link
-                href="/integration"
+                href="/features"
                 className={cn(
                   buttonVariants({ variant: "outline", size: "lg" }),
                   "group transition-all duration-300 border-white/30 text-white hover:bg-white hover:text-primary hover:border-white",
                 )}
               >
-                Saiba mais sobre integração{" "}
+                Discover Metigan{" "}
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
             </div>
@@ -62,8 +61,8 @@ export function ProductPresentation() {
             transition={{ duration: 0.7, delay: 0.2 }}
           >
             <img
-              src="https://images.pexels.com/photos/3184405/pexels-photo-3184405.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-              alt="Team collaborating on product integration"
+              src="https://images.pexels.com/photos/7163409/pexels-photo-7163409.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+              alt="Team strategizing email marketing"
               className="w-full h-auto object-cover rounded-xl shadow-lg"
             />
             <BorderBeam size={200} className="opacity-70 hover:opacity-100 transition-opacity duration-300" />
@@ -73,4 +72,3 @@ export function ProductPresentation() {
     </InvertedBackgroundSection>
   )
 }
-
