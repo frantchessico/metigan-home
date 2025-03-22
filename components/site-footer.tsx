@@ -6,8 +6,6 @@ import { useState } from "react"
 import { toast } from "sonner"
 import {
   Mail,
-  Phone,
-  MapPin,
   Code,
   LayoutTemplate,
   Layers,
