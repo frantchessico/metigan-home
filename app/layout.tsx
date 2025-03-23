@@ -25,9 +25,11 @@ export default function RootLayout({
   children: ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    // Adicionando a classe "dark" diretamente no elemento html
+    <html lang="en" className="dark" suppressHydrationWarning>
       <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
+        {/* Mantendo o ThemeProvider, mas com forcedTheme que será aplicado pelo provider */}
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} disableTransitionOnChange>
           <div className="flex min-h-screen flex-col">
             <header className="sticky top-0 z-50 w-full">
               {/* Gradient border effect */}
