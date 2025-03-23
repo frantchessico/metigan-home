@@ -148,7 +148,7 @@ export default function PricingPage() {
                 </ul>
               </div>
               <div className="mt-8 pt-6 border-t border-purple-500/20">
-                <Button className="w-full bg-white/10 hover:bg-white/20 text-white">Get Started</Button>
+                <Button onClick={() => window.location.href='https://home.metigan.com'} className="w-full bg-white/10 hover:bg-white/20 text-white">Get Started</Button>
               </div>
             </div>
 
@@ -178,7 +178,7 @@ export default function PricingPage() {
                 </ul>
               </div>
               <div className="mt-8 pt-6 border-t border-purple-500/20">
-                <Button className="w-full bg-gradient-to-r from-purple-600 to-purple-400 text-white hover:from-purple-500 hover:to-purple-300">
+                <Button onClick={() => window.location.href='https://home.metigan.com'} className="w-full bg-gradient-to-r from-purple-600 to-purple-400 text-white hover:from-purple-500 hover:to-purple-300">
                   Get Started
                 </Button>
               </div>
@@ -207,7 +207,7 @@ export default function PricingPage() {
                 </ul>
               </div>
               <div className="mt-8 pt-6 border-t border-purple-500/20">
-                <Button className="w-full bg-white/10 hover:bg-white/20 text-white">Contact Sales</Button>
+                <Button  onClick={() => window.location.href='https://home.metigan.com'} className="w-full bg-white/10 hover:bg-white/20 text-white">Get Starde</Button>
               </div>
             </div>
           </motion.div>

@@ -226,6 +226,7 @@ export default function FeaturesPage() {
                     src="https://images.pexels.com/photos/5256078/pexels-photo-5256078.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                     alt="Drag & Drop Template Builder"
                     className="w-full h-auto"
+                    width={500} height={500}
                   />
                 </div>
               </div>

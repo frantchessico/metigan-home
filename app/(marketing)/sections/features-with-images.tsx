@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { motion } from "framer-motion"
 import Image from 'next/image';
+import Link from "next/link"
 
 export function FeaturesWithImages() {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null)
@@ -99,8 +100,10 @@ export function FeaturesWithImages() {
         </div>
 
         <div className="mt-16 text-center">
-          <Button size="lg" className="rounded-full px-8">
+          <Button  size="lg" className="rounded-full px-8">
+            <Link href="/features">
             Explore All Features
+            </Link>
           </Button>
         </div>
       </div>

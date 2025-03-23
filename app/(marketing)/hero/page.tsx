@@ -134,7 +134,8 @@ function HeroPage() {
               transition={{ duration: 0.7, delay: 0.6 }}
             >
               <Link
-                href="/login"
+                href="https://home.metigan.com"
+                target="_blank"
                 className={cn(
                   buttonVariants({ size: "lg" }),
                   "bg-gradient-to-r from-purple-600 to-purple-400 hover:from-purple-500 hover:to-purple-300 w-full sm:w-auto",
@@ -143,7 +144,7 @@ function HeroPage() {
                 Get Started
               </Link>
               <a
-                href="/#features"
+                href="/features"
                 className={cn(
                   buttonVariants({ variant: "outline", size: "lg" }),
                   "border-purple-400/30 text-purple-100 hover:bg-purple-500/10 w-full sm:w-auto",

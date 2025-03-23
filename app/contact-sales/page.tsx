@@ -4,7 +4,7 @@ import type React from "react"
 
 import { useState } from "react"
 import { motion } from "framer-motion"
-import { Phone, Mail, MessageSquare, CheckCircle } from "lucide-react"
+import { Mail, CheckCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -12,7 +12,7 @@ import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { Card, CardContent } from "@/components/ui/card"
+import { Toaster, toast } from "sonner"
 
 export default function ContactSalesPage() {
   const [formState, setFormState] = useState({
@@ -38,19 +38,61 @@ export default function ContactSalesPage() {
     setFormState((prev) => ({ ...prev, [name]: value }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
 
-    // Simulate form submission
-    setTimeout(() => {
+    try {
+      // Using fetch as requested in the prompt
+      const response = await fetch("https://metigan-form-submissions-api-97eb0d2389d5.herokuapp.com/api/submissions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          formId: "67df3e0863400b1f850ecccc", // Assuming this is the form ID
+          data: formState,
+        }),
+      })
+
+      // Also implementing with axios as requested
+      // const response = await axios.post("https://f.metigan.com/f/api/submissions", {
+      //   formId: "contact-sales",
+      //   data: formState,
+      // })
+
+      if (response.ok) {
+        toast.success("Form submitted successfully!")
+        setIsSubmitted(true)
+      } else {
+        throw new Error("Failed to submit form")
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error)
+      toast.error("Failed to submit form. Please try again.")
+    } finally {
       setIsSubmitting(false)
-      setIsSubmitted(true)
-    }, 1500)
+    }
+  }
+
+  const resetForm = () => {
+    setFormState({
+      firstName: "",
+      lastName: "",
+      email: "",
+      company: "",
+      phone: "",
+      employees: "",
+      interest: "pricing",
+      message: "",
+    })
+    setIsSubmitted(false)
   }
 
   return (
     <section className="relative w-full overflow-hidden py-24">
+      
+
       {/* Background with gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-black via-black to-[#894EEE]/70 -z-10" />
 
@@ -339,7 +381,7 @@ export default function ContactSalesPage() {
                       hours.
                     </p>
                     <Button
-                      onClick={() => setIsSubmitted(false)}
+                      onClick={resetForm}
                       className="bg-gradient-to-r from-purple-600 to-purple-400 text-white hover:from-purple-500 hover:to-purple-300"
                     >
                       Send Another Message
@@ -360,19 +402,6 @@ export default function ContactSalesPage() {
               <div className="rounded-xl border border-purple-500/20 bg-black/40 backdrop-blur-sm p-6">
                 <h3 className="text-xl font-bold text-white mb-4">Other Ways to Reach Us</h3>
                 <div className="space-y-4">
-                  {/* <div className="flex items-start">
-                    <div className="flex-shrink-0 rounded-full bg-purple-500/20 p-2 mr-4">
-                      <Phone className="h-5 w-5 text-purple-300" />
-                    </div>
-                    <div>
-                      <h4 className="text-white font-medium">Call Us</h4>
-                      <p className="text-purple-100/80 text-sm">Mon-Fri, 9am-5pm EST</p>
-                      <a href="tel:+18005551234" className="text-purple-300 hover:underline">
-                        +1 (800) 555-1234
-                      </a>
-                    </div>
-                  </div> */}
-
                   <div className="flex items-start">
                     <div className="flex-shrink-0 rounded-full bg-purple-500/20 p-2 mr-4">
                       <Mail className="h-5 w-5 text-purple-300" />
@@ -385,17 +414,6 @@ export default function ContactSalesPage() {
                       </a>
                     </div>
                   </div>
-
-                  {/* <div className="flex items-start">
-                    <div className="flex-shrink-0 rounded-full bg-purple-500/20 p-2 mr-4">
-                      <MessageSquare className="h-5 w-5 text-purple-300" />
-                    </div>
-                    <div>
-                      <h4 className="text-white font-medium">Live Chat</h4>
-                      <p className="text-purple-100/80 text-sm">Available 24/7 for quick questions</p>
-                      <button className="text-purple-300 hover:underline">Start a chat</button>
-                    </div>
-                  </div> */}
                 </div>
               </div>
 
@@ -447,70 +465,6 @@ export default function ContactSalesPage() {
               </div>
             </motion.div>
           </div>
-
-          {/* Sales team section */}
-          {/* <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 1 }}
-            className="mt-16"
-          >
-            <div className="text-center mb-10">
-              <h2 className="text-2xl md:text-3xl font-bold text-white">Meet Our Sales Team</h2>
-              <p className="mt-4 text-purple-100/80 max-w-2xl mx-auto">
-                Our experienced sales representatives are dedicated to helping you find the perfect solution for your
-                business needs.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {salesTeam.map((member, index) => (
-                <Card key={index} className="bg-black/40 backdrop-blur-sm border-purple-500/20 overflow-hidden">
-                  <div className="aspect-square overflow-hidden">
-                    <img
-                      src={member.image || "/placeholder.svg"}
-                      alt={member.name}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <CardContent className="p-6">
-                    <h3 className="text-lg font-bold text-white">{member.name}</h3>
-                    <p className="text-purple-300 mb-2">{member.role}</p>
-                    <p className="text-purple-100/80 text-sm mb-4">{member.bio}</p>
-                    <div className="flex items-center text-sm text-purple-200/70">
-                      <Mail className="h-4 w-4 mr-2" />
-                      <a href={`mailto:${member.email}`} className="hover:text-purple-300">
-                        {member.email}
-                      </a>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </motion.div> */}
-
-          {/* CTA section */}
-          {/* <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 1.2 }}
-            className="mt-24 text-center"
-          >
-            <div className="rounded-xl border border-purple-500/20 bg-black/40 backdrop-blur-sm p-8 md:p-12">
-              <h2 className="text-2xl md:text-3xl font-bold text-white">Ready to Get Started?</h2>
-              <p className="mt-4 text-purple-100/80 max-w-2xl mx-auto">
-                Schedule a personalized demo with our team to see how our platform can help your business grow.
-              </p>
-              <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-                <Button className="bg-gradient-to-r from-purple-600 to-purple-400 text-white hover:from-purple-500 hover:to-purple-300">
-                  Schedule a Demo
-                </Button>
-                <Button variant="outline" className="border-purple-500/50 text-purple-100 hover:bg-purple-500/10">
-                  View Pricing Plans
-                </Button>
-              </div>
-            </div>
-          </motion.div> */}
         </div>
       </div>
 
@@ -532,29 +486,4 @@ export default function ContactSalesPage() {
     </section>
   )
 }
-
-// Sample sales team data
-const salesTeam = [
-  {
-    name: "Sarah Johnson",
-    role: "Senior Sales Representative",
-    bio: "With over 8 years of experience in email marketing solutions, Sarah helps enterprise clients optimize their communication strategies.",
-    email: "sarah.j@example.com",
-    image: "/placeholder.svg?height=400&width=400",
-  },
-  {
-    name: "Michael Chen",
-    role: "Account Executive",
-    bio: "Michael specializes in helping small to medium businesses scale their email marketing efforts with the right solutions.",
-    email: "michael.c@example.com",
-    image: "/placeholder.svg?height=400&width=400",
-  },
-  {
-    name: "Jessica Williams",
-    role: "Enterprise Solutions Manager",
-    bio: "Jessica works with large organizations to implement comprehensive email marketing strategies across multiple departments.",
-    email: "jessica.w@example.com",
-    image: "/placeholder.svg?height=400&width=400",
-  },
-]
 

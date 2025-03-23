@@ -1,10 +1,15 @@
+'use client'
 import { Check } from "lucide-react"
 import ShineBorder from "@/components/magicui/shine-border"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
+import Link from "next/link"
 
 export function PricingSection() {
+  const handleCick = () => {
+    return window.location.href = 'https://home.metigan.com'
+  }
   return (
     <section
       id="pricing"
@@ -65,7 +70,9 @@ export function PricingSection() {
               </ul>
             </CardContent>
             <CardFooter className="p-4 sm:p-6 pt-0 sm:pt-0">
-              <Button
+             
+             <Button
+                
                 variant={plan.featured ? "default" : "outline"}
                 className={cn(
                   "w-full transition-all duration-300 text-xs sm:text-sm h-9 sm:h-10",
@@ -73,9 +80,11 @@ export function PricingSection() {
                     ? "hover:bg-primary/90 hover:shadow-md"
                     : "hover:bg-primary/10 hover:text-primary hover:border-primary",
                 )}
+                onClick={handleCick}
               >
-                {plan.name === "Business" ? "Contact Sales" : "Get Started"}
+                {plan.name === "Business" ? "Get Started" : "Get Started"}
               </Button>
+             
             </CardFooter>
           </Card>
         ))}
