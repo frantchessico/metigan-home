@@ -44,7 +44,7 @@ export default function ContactSalesPage() {
 
     try {
       // Using fetch as requested in the prompt
-      const response = await fetch("https://metigan-form-submissions-api-97eb0d2389d5.herokuapp.com/api/submissions", {
+      const response = await fetch("https://metigan-form-submissions-8f5ed4831b20.herokuapp.com/api/submissions", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
