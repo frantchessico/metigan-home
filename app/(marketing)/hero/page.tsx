@@ -134,7 +134,7 @@ function HeroPage() {
               transition={{ duration: 0.7, delay: 0.6 }}
             >
               <Link
-                href="https://home.metigan.com"
+                href="https://app.metigan.com"
                 target="_blank"
                 className={cn(
                   buttonVariants({ size: "lg" }),

@@ -178,7 +178,7 @@ export const template = `<!DOCTYPE html>
                 Thanks for subscribing to our newsletter! Each month, we'll deliver the latest email marketing trends, platform updates, and expert tips to help you maximize your campaigns.
             </p>
             
-            <a href="https://home.metigan.com" class="cta-button">Get Started Now</a>
+            <a href="https://app.metigan.com" class="cta-button">Get Started Now</a>
             
             <p class="welcome-text">
                 With Metigan, you can send thousands of emails with ease. Schedule, track, and personalize 

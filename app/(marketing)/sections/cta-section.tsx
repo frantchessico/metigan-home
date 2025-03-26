@@ -237,7 +237,7 @@ export function CtaSection() {
             transition={{ duration: 0.7, delay: 0.6 }}
           >
             <Link
-              href="https://home.metigan.com"
+              href="https://app.metigan.com"
               className={cn(
                 buttonVariants({ size: "lg" }),
                 "bg-white text-primary hover:bg-white/90 hover:shadow-md transition-all duration-300 hover:scale-105",

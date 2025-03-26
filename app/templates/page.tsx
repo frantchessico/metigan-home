@@ -288,7 +288,7 @@ export default function TemplatesPage() {
                         <Clock className="h-4 w-4 mr-1" />
                         <span>Recently updated</span>
                       </div>
-                      <Button onClick={() => window.location.href = 'https://home.metigan.com/templates'} variant="ghost" size="sm" className="text-purple-300 p-0 h-auto">
+                      <Button onClick={() => window.location.href = 'https://app.metigan.com/templates'} variant="ghost" size="sm" className="text-purple-300 p-0 h-auto">
                         Use <ArrowRight className="h-4 w-4 ml-1" />
                       </Button>
                     </CardFooter>
@@ -648,7 +648,7 @@ export default function TemplatesPage() {
             </div>
             <div className="flex gap-2">
               
-              <Button onClick={() => window.location.href = 'https://home.metigan.com/templates'} className="bg-gradient-to-r from-purple-600 to-purple-400 text-white hover:from-purple-500 hover:to-purple-300">
+              <Button onClick={() => window.location.href = 'https://app.metigan.com/templates'} className="bg-gradient-to-r from-purple-600 to-purple-400 text-white hover:from-purple-500 hover:to-purple-300">
                 Use Template
               </Button>
             </div>

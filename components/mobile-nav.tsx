@@ -122,7 +122,7 @@ export default function MobileNav() {
 
               <motion.div variants={itemVariants} className="pt-4">
                 <Link
-                  href="https://home.metigan.com"
+                  href="https://app.metigan.com"
                   className={cn(
                     buttonVariants(),
                     "bg-gradient-to-r from-purple-600 to-purple-400 text-white hover:from-purple-500 hover:to-purple-300 w-full mt-4 py-6 text-lg font-medium transition-all duration-300 hover:shadow-[0_0_15px_rgba(168,85,247,0.5)]",

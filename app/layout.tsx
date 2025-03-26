@@ -64,7 +64,7 @@ export default function RootLayout({
                   <div className="flex items-center gap-4">
                     <MobileNav />
                     <Link
-                      href="https://home.metigan.com"
+                      href="https://app.metigan.com"
                       className={cn(
                         buttonVariants({ size: "sm" }),
                         "bg-gradient-to-r from-purple-600 to-purple-400 text-white hover:from-purple-500 hover:to-purple-300 px-5 py-2 transition-all duration-300 hover:scale-105 hover:shadow-[0_0_15px_rgba(168,85,247,0.5)]",

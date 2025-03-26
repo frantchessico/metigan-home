@@ -125,7 +125,7 @@ export default function FeaturesPage() {
               transition={{ duration: 0.7, delay: 0.6 }}
               className="mt-8 flex flex-col sm:flex-row gap-4"
             >
-              <Button className="bg-gradient-to-r from-purple-600 to-purple-400 text-white hover:from-purple-500 hover:to-purple-300" onClick={() => window.location.href = 'https://home.metigan.com'}>
+              <Button className="bg-gradient-to-r from-purple-600 to-purple-400 text-white hover:from-purple-500 hover:to-purple-300" onClick={() => window.location.href = 'https://app.metigan.com'}>
                 Start For Free
               </Button>
              
@@ -217,7 +217,7 @@ export default function FeaturesPage() {
                       </li>
                     ))}
                   </ul>
-                  <Button className="bg-gradient-to-r from-purple-600 to-purple-400 text-white hover:from-purple-500 hover:to-purple-300" onClick={() => window.location.href = 'https://home.metigan.com'}>
+                  <Button className="bg-gradient-to-r from-purple-600 to-purple-400 text-white hover:from-purple-500 hover:to-purple-300" onClick={() => window.location.href = 'https://app.metigan.com'}>
                     Try Template Builder <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </div>
@@ -406,7 +406,7 @@ export default function FeaturesPage() {
                 Join thousands of satisfied customers who trust our platform for their email marketing needs.
               </p>
               <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-                <Button className="bg-gradient-to-r from-purple-600 to-purple-400 text-white hover:from-purple-500 hover:to-purple-300" onClick={() => window.location.href = 'https://home.metigan.com'}>
+                <Button className="bg-gradient-to-r from-purple-600 to-purple-400 text-white hover:from-purple-500 hover:to-purple-300" onClick={() => window.location.href = 'https://app.metigan.com'}>
                   Start For Free
                 </Button>
                 <Button onClick={() => router.push('/contact-sales')} variant="outline" className="border-purple-500/50 text-purple-100 hover:bg-purple-500/10">

@@ -8,7 +8,7 @@ import Link from "next/link"
 
 export function PricingSection() {
   const handleCick = () => {
-    return window.location.href = 'https://home.metigan.com'
+    return window.location.href = 'https://app.metigan.com'
   }
   return (
     <section

@@ -375,7 +375,7 @@ export default function FormTemplatesPage() {
                 needs.
               </p>
               <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-                <Button onClick={() => window.location.href = 'https://home.metigan.com/forms'} className="bg-gradient-to-r from-purple-600 to-purple-400 text-white hover:from-purple-500 hover:to-purple-300">
+                <Button onClick={() => window.location.href = 'https://app.metigan.com/forms'} className="bg-gradient-to-r from-purple-600 to-purple-400 text-white hover:from-purple-500 hover:to-purple-300">
                   <Download className="h-4 w-4 mr-2" /> Create New Form
                 </Button>
                 {/* <Button variant="outline" className="border-purple-500/50 text-purple-100 hover:bg-purple-500/10">
@@ -616,7 +616,7 @@ export default function FormTemplatesPage() {
             </div>
             <div className="flex gap-2">
               <Button
-                onClick={() => (window.location.href = "https://home.metigan.com/forms")}
+                onClick={() => (window.location.href = "https://app.metigan.com/forms")}
                 className="bg-gradient-to-r from-purple-600 to-purple-400 text-white hover:from-purple-500 hover:to-purple-300"
               >
                 Use Template
