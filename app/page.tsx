@@ -13,18 +13,15 @@ export default function Home() {
       <>
       <HeroSection />
       <HeroPage />
-      {/* <FeaturesSection/> */}
+      
       <FeaturesWithImages />
       <ProductPresentation />
       <OnboardingSteps />
       <MarketingSection />
-      {/* <EmailDashboard/> */}
-      {/* <IntegrateSection/> */}
-      {/* <TestimonialsSection /> */}
+      
       <PricingSection />
       <FaqSection />
-      {/* <HeroSection/> */}
-      {/* <CtaSectionWithImage /> */}
+      
       <CtaSection/>
       </>
   );

@@ -3,19 +3,22 @@
 import type React from "react"
 
 import { useState, useEffect } from "react"
-import { motion } from "framer-motion"
-import { ArrowRight, Mail, CheckCircle, Zap, Clock, BarChart3, Loader2 } from "lucide-react"
+import { motion, AnimatePresence } from "framer-motion"
+import { ArrowRight, Mail, CheckCircle, Zap, Clock, BarChart3, Loader2, X, MessageSquare } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
-import { sendNewsletterEmail } from "@/app/email/metigan"
 import { toast } from "sonner"
+import Image from "next/image"
 
 export function HeroSection() {
   const [email, setEmail] = useState("")
   const [isEmailFocused, setIsEmailFocused] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [showBanner, setShowBanner] = useState(false)
+  const [bannerClosed, setBannerClosed] = useState(false)
+  const [showPulseButton, setShowPulseButton] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,6 +28,25 @@ export function HeroSection() {
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
+
+  useEffect(() => {
+    // Show banner after 5 seconds or on 50% scroll
+    const timer = setTimeout(() => {
+      if (!bannerClosed) setShowBanner(true)
+    }, 5000)
+
+    const handleScrollForBanner = () => {
+      if (window.scrollY > window.innerHeight * 0.5 && !bannerClosed) {
+        setShowBanner(true)
+      }
+    }
+
+    window.addEventListener("scroll", handleScrollForBanner)
+    return () => {
+      clearTimeout(timer)
+      window.removeEventListener("scroll", handleScrollForBanner)
+    }
+  }, [bannerClosed])
 
   const validateEmail = (email: string) => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -47,7 +69,8 @@ export function HeroSection() {
     setIsSubmitting(true)
 
     try {
-      await sendNewsletterEmail(email)
+      // Mock implementation - in a real app, you would call an API endpoint
+      await new Promise((resolve) => setTimeout(resolve, 1000)) // Simulate network request
       toast.success("Thank you for subscribing to our newsletter!")
       setEmail("")
     } catch (error) {
@@ -58,8 +81,136 @@ export function HeroSection() {
     }
   }
 
+  const closeBanner = () => {
+    setBannerClosed(true)
+    setShowBanner(false)
+    // Show the pulse button after a short delay
+    setTimeout(() => {
+      setShowPulseButton(true)
+    }, 500)
+  }
+
+  const reopenBanner = () => {
+    setShowPulseButton(false)
+    setShowBanner(true)
+    setBannerClosed(false)
+  }
+
   return (
     <section className="relative w-full overflow-hidden">
+      <AnimatePresence>
+        {showBanner && !bannerClosed && (
+          <motion.div
+            initial={{ x: 300, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            exit={{ x: 300, opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed right-0 top-1/3 z-50 w-72 sm:w-80 md:w-96 shadow-xl rounded-l-lg overflow-hidden border border-r-0 border-purple-300/30"
+            style={{ maxHeight: "450px" }}
+          >
+            {/* Ad label */}
+            <div className="absolute top-1 right-1 bg-gray-700/70 text-white text-[10px] px-1 rounded">Ad</div>
+
+            {/* Close button - Positioned on the left side */}
+            <Button
+              variant="ghost"
+              size="icon"
+              className="absolute left-1 top-1 bg-black/30 text-white hover:bg-black/50 z-10 h-8 w-8 rounded-full"
+              onClick={closeBanner}
+              aria-label="Close banner"
+            >
+              <X className="h-4 w-4" />
+            </Button>
+
+            {/* Banner content */}
+            <div className="flex flex-col bg-gradient-to-br from-purple-900 via-purple-800 to-purple-900">
+              {/* Banner image */}
+              <div className="relative h-40 w-full">
+                <Image
+                  src="https://images.pexels.com/photos/5711039/pexels-photo-5711039.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                  alt="Email marketing dashboard"
+                  width={400}
+                  height={160}
+                  className="object-cover w-full h-full"
+                />
+              </div>
+
+              {/* Banner text with more prominent styling */}
+              <div className="p-5 text-white">
+                <div className="flex items-center mb-3">
+                  <span className="text-2xl mr-2">🚀</span>
+                  <h3 className="font-bold text-xl">Metigan Email</h3>
+                </div>
+
+                {/* Highlighted copy with more visible font */}
+                <div className="mb-4 bg-purple-700/50 p-3 rounded-lg border-l-4 border-yellow-400">
+                  <p className="font-bold text-base leading-tight">
+                    Send up to <span className="text-yellow-300 text-lg">3,000 emails</span> per month.
+                  </p>
+                  <p className="text-yellow-300 font-extrabold text-xl my-1">Free.</p>
+                  <p className="font-medium text-sm">Create your account today and get started in minutes.</p>
+                </div>
+
+                <Button
+                  className="w-full bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-black font-bold text-base py-6"
+                  onClick={() => (window.location.href = "https://app.metigan.com/")}
+                >
+                  <span>Start now</span>
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+
+                {/* Added a text link to close the banner as an alternative */}
+                <p className="text-center mt-3 text-xs text-purple-200/80">
+                  <button onClick={closeBanner} className="underline hover:text-white transition-colors">
+                    No thanks, maybe later
+                  </button>
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Pulsating button that appears when banner is closed */}
+      <AnimatePresence>
+        {showPulseButton && (
+          <motion.div
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0, opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed bottom-6 right-6 z-50"
+          >
+            <motion.div
+              animate={{
+                scale: [1, 1.1, 1],
+                boxShadow: [
+                  "0 0 0 0 rgba(137, 78, 238, 0.4)",
+                  "0 0 0 10px rgba(137, 78, 238, 0)",
+                  "0 0 0 0 rgba(137, 78, 238, 0)",
+                ],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Number.POSITIVE_INFINITY,
+                repeatType: "loop",
+              }}
+            >
+              <Button
+                onClick={reopenBanner}
+                className="h-14 w-14 rounded-full bg-gradient-to-r from-purple-600 to-purple-800 hover:from-purple-500 hover:to-purple-700 shadow-lg"
+                aria-label="Open special offer"
+              >
+                <div className="flex flex-col items-center justify-center">
+                  <MessageSquare className="h-6 w-6 text-white mb-0.5" />
+                  <span className="text-[10px] text-white">Offer</span>
+                </div>
+              </Button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Background with gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-black via-black to-[#894EEE]/70 -z-10" />
 
@@ -292,4 +443,3 @@ const stats = [
   { value: "5,000+", label: "Happy Customers" },
   { value: "24/7", label: "Expert Support" },
 ]
-
