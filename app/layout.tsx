@@ -11,6 +11,8 @@ import { SiteFooter } from "@/components/site-footer"
 import { Toaster } from "sonner"
 import "./globals.css"
 import Image from "next/image"
+import GoogleAnalytics from "@/components/GoogleAnalytics"
+import { Suspense } from "react"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -27,6 +29,11 @@ export default function RootLayout({
   return (
     // Adicionando a classe "dark" diretamente no elemento html
     <html lang="en" className="dark" suppressHydrationWarning>
+       <head>
+        <Suspense fallback={null}>
+          <GoogleAnalytics />
+        </Suspense>
+      </head>
       <body className={inter.className}>
         {/* Mantendo o ThemeProvider, mas com forcedTheme que será aplicado pelo provider */}
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} disableTransitionOnChange>

@@ -1,15 +1,15 @@
-'use client'
+"use client"
 import { Check } from "lucide-react"
 import ShineBorder from "@/components/magicui/shine-border"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
-import Link from "next/link"
 
 export function PricingSection() {
-  const handleCick = () => {
-    return window.location.href = 'https://app.metigan.com'
+  const handleClick = () => {
+    return (window.location.href = "https://app.metigan.com")
   }
+
   return (
     <section
       id="pricing"
@@ -25,8 +25,9 @@ export function PricingSection() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 mt-8 sm:mt-10 md:mt-12">
-        {pricingPlans.map((plan, index) => (
+      {/* Updated grid to handle 4 cards properly */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-6 mt-8 sm:mt-10 md:mt-12">
+        {pricingPlans.map((plan) => (
           <Card
             key={plan.name}
             className={cn(
@@ -34,7 +35,6 @@ export function PricingSection() {
               plan.featured
                 ? "border-primary shadow-md bg-primary/5 dark:bg-primary/10 order-first sm:order-none"
                 : "hover:border-primary/30",
-              plan.featured && index === 1 ? "sm:col-span-2 lg:col-span-1 sm:col-start-1 lg:col-start-2" : "",
             )}
           >
             <CardHeader className="p-4 sm:p-6">
@@ -70,9 +70,7 @@ export function PricingSection() {
               </ul>
             </CardContent>
             <CardFooter className="p-4 sm:p-6 pt-0 sm:pt-0">
-             
-             <Button
-                
+              <Button
                 variant={plan.featured ? "default" : "outline"}
                 className={cn(
                   "w-full transition-all duration-300 text-xs sm:text-sm h-9 sm:h-10",
@@ -80,11 +78,10 @@ export function PricingSection() {
                     ? "hover:bg-primary/90 hover:shadow-md"
                     : "hover:bg-primary/10 hover:text-primary hover:border-primary",
                 )}
-                onClick={handleCick}
+                onClick={handleClick}
               >
-                {plan.name === "Business" ? "Get Started" : "Get Started"}
+                Get Started
               </Button>
-             
             </CardFooter>
           </Card>
         ))}
@@ -95,10 +92,10 @@ export function PricingSection() {
 
 const pricingPlans = [
   {
+    tier: "free",
     name: "Free",
-    description: "For personal projects and small businesses",
     price: 0,
-    featured: false,
+    description: "For personal projects and small businesses",
     features: [
       "3,000 emails per month",
       "5,000 contacts",
@@ -107,12 +104,18 @@ const pricingPlans = [
       "Basic templates",
       "Email support",
     ],
+    limits: {
+      emails: 3000,
+      contacts: 5000,
+      apiCalls: 1000,
+    },
+    featured: false,
   },
   {
+    tier: "pro",
     name: "Pro",
-    description: "For growing businesses with advanced needs",
     price: 16,
-    featured: true,
+    description: "For growing businesses with advanced needs",
     features: [
       "65,000 emails per month",
       "85,000 contacts",
@@ -121,24 +124,61 @@ const pricingPlans = [
       "API access",
       "No daily limit",
       "Detailed analytics",
-      "24/7 phone support",
+      "Email & chat support",
     ],
+    limits: {
+      emails: 65000,
+      contacts: 85000,
+      apiCalls: 20000,
+    },
+    featured: true,
   },
   {
-    name: "Business",
-    description: "For large businesses with high volume needs",
-    price: 150,
-    featured: false,
+    tier: "growth",
+    name: "Growth",
+    price: 49,
+    description: "For scaling businesses with higher volume",
     features: [
-      "Unlimited emails",
-      "Unlimited contacts",
-      "1500 Domains",
-      "2500 Senders",
-      "Detailed analytics",
+      "225,000 emails per month",
+      "300,000 contacts",
+      "50 Domains",
+      "150 Senders",
       "API access",
+      "Smart scheduling & workflows",
+      "Advanced analytics",
+      "No daily limit",
+      "Priority email & chat support",
+      "Segmented audiences",
+    ],
+    limits: {
+      emails: 225000,
+      contacts: 300000,
+      apiCalls: 60000,
+    },
+    featured: false,
+  },
+  {
+    tier: "business",
+    name: "Business",
+    price: 150,
+    description: "For large businesses with high volume needs",
+    features: [
+      "700,000 emails per month",
+      "Unlimited contacts",
+      "1,500 Domains",
+      "2,500 Senders",
+      "API access",
+      "Dedicated IP add-on",
+      "Advanced analytics",
       "No daily limit",
       "Priority email support",
+      "Account manager",
     ],
+    limits: {
+      emails: 700000,
+      contacts: Number.POSITIVE_INFINITY,
+      apiCalls: 100000,
+    },
+    featured: false,
   },
 ]
-

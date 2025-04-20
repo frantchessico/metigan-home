@@ -4,13 +4,12 @@ import { useState } from "react"
 import { motion } from "framer-motion"
 import { Check, CheckCircle, Mail, Zap, Clock, BarChart3, Code, Globe, Users, MessageSquare, Phone } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge";
-import { useRouter } from "next/navigation";
-
+import { useRouter } from "next/navigation"
 
 export default function PricingPage() {
   const [billingCycle, setBillingCycle] = useState<"monthly" | "yearly">("monthly")
-   const router = useRouter()
+  const router = useRouter()
+
   return (
     <section className="relative w-full overflow-hidden py-24">
       {/* Background with gradient */}
@@ -59,9 +58,9 @@ export default function PricingPage() {
         />
       </div>
 
-      <div className="container relative z-10 px-4">
-        <div className="mx-auto max-w-5xl">
-          <div className="flex flex-col items-center text-center mb-12">
+      <div className="container relative z-10 px-4 mx-auto">
+        <div className="mx-auto max-w-7xl">
+          <div className="flex flex-col items-center text-center mb-16">
             {/* Animated badge */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -97,30 +96,6 @@ export default function PricingPage() {
               Choose the perfect plan for your email marketing needs. Scale as you grow with our flexible pricing
               options.
             </motion.p>
-
-            {/* Billing toggle */}
-            {/* <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.6 }}
-              className="mt-8"
-            >
-              <Tabs
-                defaultValue="monthly"
-                className="w-[300px]"
-                onValueChange={(value) => setBillingCycle(value as "monthly" | "yearly")}
-              >
-                <TabsList className="grid w-full grid-cols-2 bg-black/40 backdrop-blur-sm">
-                  <TabsTrigger value="monthly">Monthly</TabsTrigger>
-                  <TabsTrigger value="yearly">
-                    Yearly
-                    <Badge variant="outline" className="ml-2 bg-purple-500/20 text-purple-200 border-purple-500/30">
-                      Save 20%
-                    </Badge>
-                  </TabsTrigger>
-                </TabsList>
-              </Tabs>
-            </motion.div> */}
           </div>
 
           {/* Pricing cards */}
@@ -128,57 +103,97 @@ export default function PricingPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.8 }}
-            className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-3"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8"
           >
             {/* Free Plan */}
             <div className="rounded-xl border border-purple-500/20 bg-black/40 backdrop-blur-sm p-8 transition-all duration-300 hover:border-purple-500/40 hover:bg-black/50 flex flex-col h-full">
-              <div>
-                <h3 className="text-xl font-medium text-white">Free</h3>
+              <div className="flex-1">
+                <h3 className="text-2xl font-bold text-white">Free</h3>
                 <p className="mt-2 text-sm text-purple-100/80">For personal projects and small businesses</p>
-                <div className="mt-4 flex items-baseline">
-                  <span className="text-4xl font-bold text-white">$0.00</span>
+                <div className="mt-6 mb-8">
+                  <span className="text-5xl font-bold text-white">$0.00</span>
                 </div>
-                <ul className="mt-6 space-y-4">
+                <ul className="space-y-5">
                   {freeFeatures.map((feature, index) => (
                     <li key={index} className="flex items-start">
-                      <Check className="h-5 w-5 text-purple-400 mr-2 flex-shrink-0 mt-0.5" />
+                      <Check className="h-5 w-5 text-purple-400 mr-3 flex-shrink-0 mt-0.5" />
                       <span className="text-sm text-purple-100">{feature}</span>
                     </li>
                   ))}
                 </ul>
               </div>
-              <div className="mt-8 pt-6 border-t border-purple-500/20">
-                <Button onClick={() => window.location.href='https://app.metigan.com'} className="w-full bg-white/10 hover:bg-white/20 text-white">Get Started</Button>
+              <div className="mt-10">
+                <Button
+                  onClick={() => (window.location.href = "https://app.metigan.com")}
+                  className="w-full bg-white/10 hover:bg-white/20 text-white py-6 text-base"
+                >
+                  Get Started
+                </Button>
               </div>
             </div>
 
             {/* Pro Plan */}
             <div className="rounded-xl border-2 border-purple-500 bg-black/60 backdrop-blur-sm p-8 transition-all duration-300 hover:bg-black/70 flex flex-col h-full relative">
-              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-purple-600 to-purple-400 text-white text-sm font-medium py-1 px-4 rounded-full">
+              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-purple-600 to-purple-400 text-white text-sm font-medium py-1.5 px-6 rounded-full">
                 Most Popular
               </div>
-              <div>
-                <h3 className="text-xl font-medium text-white">Pro</h3>
+              <div className="flex-1">
+                <h3 className="text-2xl font-bold text-white">Pro</h3>
                 <p className="mt-2 text-sm text-purple-100/80">For growing businesses with advanced needs</p>
-                <div className="mt-4 flex items-baseline">
-                  <span className="text-4xl font-bold text-white">
+                <div className="mt-6 mb-8 flex items-baseline">
+                  <span className="text-5xl font-bold text-white">
                     ${billingCycle === "monthly" ? "16.00" : "12.80"}
                   </span>
-                  <span className="ml-1 text-sm text-purple-100/80">
+                  <span className="ml-2 text-sm text-purple-100/80">
                     /{billingCycle === "monthly" ? "month" : "month, billed yearly"}
                   </span>
                 </div>
-                <ul className="mt-6 space-y-4">
+                <ul className="space-y-5">
                   {proFeatures.map((feature, index) => (
                     <li key={index} className="flex items-start">
-                      <Check className="h-5 w-5 text-purple-400 mr-2 flex-shrink-0 mt-0.5" />
+                      <Check className="h-5 w-5 text-purple-400 mr-3 flex-shrink-0 mt-0.5" />
                       <span className="text-sm text-purple-100">{feature}</span>
                     </li>
                   ))}
                 </ul>
               </div>
-              <div className="mt-8 pt-6 border-t border-purple-500/20">
-                <Button onClick={() => window.location.href='https://app.metigan.com'} className="w-full bg-gradient-to-r from-purple-600 to-purple-400 text-white hover:from-purple-500 hover:to-purple-300">
+              <div className="mt-10">
+                <Button
+                  onClick={() => (window.location.href = "https://app.metigan.com")}
+                  className="w-full bg-gradient-to-r from-purple-600 to-purple-400 text-white hover:from-purple-500 hover:to-purple-300 py-6 text-base"
+                >
+                  Get Started
+                </Button>
+              </div>
+            </div>
+
+            {/* Growth Plan */}
+            <div className="rounded-xl border border-purple-500/20 bg-black/40 backdrop-blur-sm p-8 transition-all duration-300 hover:border-purple-500/40 hover:bg-black/50 flex flex-col h-full">
+              <div className="flex-1">
+                <h3 className="text-2xl font-bold text-white">Growth</h3>
+                <p className="mt-2 text-sm text-purple-100/80">For scaling businesses with higher volume</p>
+                <div className="mt-6 mb-8 flex items-baseline">
+                  <span className="text-5xl font-bold text-white">
+                    ${billingCycle === "monthly" ? "49.00" : "39.20"}
+                  </span>
+                  <span className="ml-2 text-sm text-purple-100/80">
+                    /{billingCycle === "monthly" ? "month" : "month, billed yearly"}
+                  </span>
+                </div>
+                <ul className="space-y-5">
+                  {growthFeatures.map((feature, index) => (
+                    <li key={index} className="flex items-start">
+                      <Check className="h-5 w-5 text-purple-400 mr-3 flex-shrink-0 mt-0.5" />
+                      <span className="text-sm text-purple-100">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="mt-10">
+                <Button
+                  onClick={() => (window.location.href = "https://app.metigan.com")}
+                  className="w-full bg-white/10 hover:bg-white/20 text-white py-6 text-base"
+                >
                   Get Started
                 </Button>
               </div>
@@ -186,28 +201,33 @@ export default function PricingPage() {
 
             {/* Business Plan */}
             <div className="rounded-xl border border-purple-500/20 bg-black/40 backdrop-blur-sm p-8 transition-all duration-300 hover:border-purple-500/40 hover:bg-black/50 flex flex-col h-full">
-              <div>
-                <h3 className="text-xl font-medium text-white">Business</h3>
+              <div className="flex-1">
+                <h3 className="text-2xl font-bold text-white">Business</h3>
                 <p className="mt-2 text-sm text-purple-100/80">For large businesses with high volume needs</p>
-                <div className="mt-4 flex items-baseline">
-                  <span className="text-4xl font-bold text-white">
+                <div className="mt-6 mb-8 flex items-baseline">
+                  <span className="text-5xl font-bold text-white">
                     ${billingCycle === "monthly" ? "150.00" : "120.00"}
                   </span>
-                  <span className="ml-1 text-sm text-purple-100/80">
+                  <span className="ml-2 text-sm text-purple-100/80">
                     /{billingCycle === "monthly" ? "month" : "month, billed yearly"}
                   </span>
                 </div>
-                <ul className="mt-6 space-y-4">
+                <ul className="space-y-5">
                   {businessFeatures.map((feature, index) => (
                     <li key={index} className="flex items-start">
-                      <Check className="h-5 w-5 text-purple-400 mr-2 flex-shrink-0 mt-0.5" />
+                      <Check className="h-5 w-5 text-purple-400 mr-3 flex-shrink-0 mt-0.5" />
                       <span className="text-sm text-purple-100">{feature}</span>
                     </li>
                   ))}
                 </ul>
               </div>
-              <div className="mt-8 pt-6 border-t border-purple-500/20">
-                <Button  onClick={() => window.location.href='https://app.metigan.com'} className="w-full bg-white/10 hover:bg-white/20 text-white">Get Starde</Button>
+              <div className="mt-10">
+                <Button
+                  onClick={() => (window.location.href = "https://app.metigan.com")}
+                  className="w-full bg-white/10 hover:bg-white/20 text-white py-6 text-base"
+                >
+                  Get Started
+                </Button>
               </div>
             </div>
           </motion.div>
@@ -217,9 +237,9 @@ export default function PricingPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 1 }}
-            className="mt-24"
+            className="mt-32"
           >
-            <div className="text-center mb-12">
+            <div className="text-center mb-16">
               <h2 className="text-3xl font-bold text-white">Email Features</h2>
               <p className="mt-4 text-purple-100/80">Everything you need to succeed with your email campaigns</p>
             </div>
@@ -245,7 +265,7 @@ export default function PricingPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 1.2 }}
-            className="mt-24 text-center"
+            className="mt-32 text-center"
           >
             <div className="rounded-xl border border-purple-500/20 bg-black/40 backdrop-blur-sm p-8 md:p-12">
               <h2 className="text-2xl md:text-3xl font-bold text-white">Ready to get started?</h2>
@@ -253,11 +273,18 @@ export default function PricingPage() {
                 Join thousands of satisfied customers who trust our platform for their email marketing needs.
               </p>
               <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-                <Button onClick={() => window.location.href = 'https://app.metigan.com'}  className="bg-gradient-to-r from-purple-600 to-purple-400 text-white hover:from-purple-500 hover:to-purple-300">
+                <Button
+                  onClick={() => (window.location.href = "https://app.metigan.com")}
+                  className="bg-gradient-to-r from-purple-600 to-purple-400 text-white hover:from-purple-500 hover:to-purple-300 py-6 px-8 text-base"
+                >
                   Start For Free
                 </Button>
-                
-                <Button onClick={() => router.push('/contact-sales')} variant="outline" className="border-purple-500/50 text-purple-100 hover:bg-purple-500/10">
+
+                <Button
+                  onClick={() => router.push("/contact-sales")}
+                  variant="outline"
+                  className="border-purple-500/50 text-purple-100 hover:bg-purple-500/10 py-6 px-8 text-base"
+                >
                   Contact Sales
                 </Button>
               </div>
@@ -304,19 +331,35 @@ const proFeatures = [
   "API access",
   "No daily limit",
   "Detailed analytics",
-  "24/7 phone support",
+  "Email & chat support",
+]
+
+// Growth plan features
+const growthFeatures = [
+  "225,000 emails per month",
+  "300,000 contacts",
+  "50 Domains",
+  "150 Senders",
+  "API access",
+  "Smart scheduling & workflows",
+  "Advanced analytics",
+  "No daily limit",
+  "Priority email & chat support",
+  "Segmented audiences",
 ]
 
 // Business plan features
 const businessFeatures = [
-  "Unlimited emails",
+  "700,000 emails per month",
   "Unlimited contacts",
-  "1500 Domains",
-  "2500 Senders",
-  "Detailed analytics",
+  "1,500 Domains",
+  "2,500 Senders",
   "API access",
+  "Dedicated IP add-on",
+  "Advanced analytics",
   "No daily limit",
   "Priority email support",
+  "Account manager",
 ]
 
 // Email features
@@ -382,4 +425,3 @@ const emailFeatures = [
     icon: Phone,
   },
 ]
-
