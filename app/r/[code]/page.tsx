@@ -10,7 +10,7 @@ const SIGNUP_URL = process.env.NEXT_PUBLIC_SIGNUP_URL || "https://app.metigan.co
 export default function ReferralPage() {
   const params = useParams();
   const router = useRouter();
-  const code = params.code as string;
+  const code = (params?.code as string) || "";
   const [status, setStatus] = useState<"validating" | "valid" | "invalid">("validating");
   const [bonusCredits, setBonusCredits] = useState(250);
   const [errorMessage, setErrorMessage] = useState("");
