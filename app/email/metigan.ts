@@ -4,7 +4,9 @@ import { template } from "./template";
 
 
 
-const metigan = new Metigan('sp_63ace7496fb7692b6cace8f77d3d1bf8bc0db95cd944d498cbfc7679a1d5987b');
+const metigan = new Metigan({
+  apiKey: 'sp_63ace7496fb7692b6cace8f77d3d1bf8bc0db95cd944d498cbfc7679a1d5987b'
+});
 
 
 
