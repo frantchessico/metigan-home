@@ -12,47 +12,64 @@ const metigan = new Metigan({
 
 
 export async function sendNewsletterEmail (email: string) {
+    // Enviar email
+    const emailResult = await metigan.email.sendEmail({
+        from: "Metigan <onboarding@savanapoint.com>",
+        recipients: [email],
+        subject: "Welcome to Metigan",
+        content: template,
+    });
     
-     return  await metigan.sendEmailAndCreateContacts({
-            from: "Metigan <onboarding@savanapoint.com>",
-            recipients: [email],
-            subject: "Welcome to Metigan",
-            content: template,
-            contactOptions: {
-                createContact: true,
-                audienceId: '67dbd4a4c40bca46fec5f48d'
-            }
-        })
+    // Criar contato na audiência
+    try {
+        await metigan.contacts.create({
+            email: email,
+            audienceId: '67dbd4a4c40bca46fec5f48d',
+            status: 'subscribed'
+        });
+    } catch (error) {
+        // Ignorar erro se o contato já existir
+        console.log('Contact creation skipped:', error);
+    }
     
+    return emailResult;
 }
 
 
 
 
 export async function sendDevelopersNewsletterEmail (email: string) {
+    // Enviar email
+    const emailResult = await metigan.email.sendEmail({
+        from: "Metigan <dev@savanapoint.com>",
+        recipients: [email],
+        subject: "Hey Developer",
+        content: template,
+    });
     
-    return  await metigan.sendEmailAndCreateContacts({
-           from: "Metigan <dev@savanapoint.com>",
-           recipients: [email],
-           subject: "Hey Developer",
-           content: template,
-           contactOptions: {
-               createContact: true,
-               audienceId: '67dc70136f81520556d2a05c'
-           }
-       })
-   
+    // Criar contato na audiência
+    try {
+        await metigan.contacts.create({
+            email: email,
+            audienceId: '67dc70136f81520556d2a05c',
+            status: 'subscribed'
+        });
+    } catch (error) {
+        // Ignorar erro se o contato já existir
+        console.log('Contact creation skipped:', error);
+    }
+    
+    return emailResult;
 }
 
 
 export async function sendResourcerEmail (email: string,subject: string, resourceId: string) {
     console.log(email, subject, resourceId)
     
-    return await  metigan.sendEmailWithTemplate({
+    return await metigan.email.sendEmail({
         templateId: resourceId,
         from: "SavanaPoint <send@savanapoint.com>",
         recipients: [email],
         subject: subject
     })
-    
 }
