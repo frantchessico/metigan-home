@@ -46,9 +46,14 @@ export function SiteFooter() {
     setIsSubmitting(true)
 
     try {
-      await sendDevelopersNewsletterEmail(email)
-      toast.success("You're subscribed to our developer newsletter!")
-      setEmail("")
+      const result = await sendDevelopersNewsletterEmail(email)
+      if ('success' in result && result.success === true) {
+        toast.success("You're subscribed to our developer newsletter!")
+        setEmail("")
+      } else {
+        const errorMessage = 'message' in result ? result.message : 'Failed to subscribe. Please try again later.'
+        toast.error(errorMessage)
+      }
     } catch (error) {
       toast.error("Failed to subscribe. Please try again later.")
       console.error("Newsletter subscription error:", error)

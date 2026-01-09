@@ -47,12 +47,20 @@ export function CtaSection() {
     // Simulate API call
 
     try {
-      await sendNewsletterEmail(email)
-      setIsSubmitting(false)
-      setIsSubscribed(true)
+      const result = await sendNewsletterEmail(email)
+      if ('success' in result && result.success === true) {
+        setIsSubmitting(false)
+        setIsSubscribed(true)
+      } else {
+        setIsSubmitting(false)
+        setIsSubscribed(false)
+        const errorMessage = 'message' in result ? result.message : 'Failed to subscribe. Please try again.'
+        setError(errorMessage)
+      }
     } catch (error) {
       setIsSubmitting(false)
       setIsSubscribed(false)
+      setError("An error occurred. Please try again.")
     }
    
 

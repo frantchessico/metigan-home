@@ -34,8 +34,7 @@ export async function sendNewsletterEmail (email: string) {
             status: 'subscribed'
         });
     } catch (error) {
-        // Ignorar erro se o contato já existir
-        console.log('Contact creation skipped:', error);
+        // Ignorar erro se o contato já existir (pode já existir)
     }
     
     return emailResult;
@@ -61,8 +60,7 @@ export async function sendDevelopersNewsletterEmail (email: string) {
             status: 'subscribed'
         });
     } catch (error) {
-        // Ignorar erro se o contato já existir
-        console.log('Contact creation skipped:', error);
+        // Ignorar erro se o contato já existir (pode já existir)
     }
     
     return emailResult;
@@ -70,8 +68,6 @@ export async function sendDevelopersNewsletterEmail (email: string) {
 
 
 export async function sendResourcerEmail (email: string,subject: string, resourceId: string) {
-    console.log(email, subject, resourceId)
-    
     return await metigan.email.sendEmail({
         templateId: resourceId,
         from: "SavanaPoint <send@savanapoint.com>",

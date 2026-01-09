@@ -45,7 +45,9 @@ export function EmailDialog({ open, onOpenChange, resourceId, resourceTitle, onS
 
       if ('success' in result && result.success === true) {
         // Store email in localStorage
-        localStorage.setItem("userEmail", email)
+        if (typeof window !== 'undefined') {
+          localStorage.setItem("userEmail", email)
+        }
 
         // Show success notification
         toast.success("Resource will be sent to your email shortly!")

@@ -39,10 +39,9 @@ export function ResourceCard({
 
   // Check if user already has an email stored
   useEffect(() => {
-    console.log(id)
-    const storedEmail = localStorage.getItem("userEmail")
+    const storedEmail = typeof window !== 'undefined' ? localStorage.getItem("userEmail") : null
     // Check if this specific resource was already sent to this email
-    const sentResources = JSON.parse(localStorage.getItem("sentResources") || "[]")
+    const sentResources = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem("sentResources") || "[]") : []
 
     if (sentResources.includes(id)) {
       setIsSent(true)
@@ -50,7 +49,7 @@ export function ResourceCard({
   }, [id])
 
   const handleReceiveClick = async () => {
-    const storedEmail = localStorage.getItem("userEmail")
+    const storedEmail = typeof window !== 'undefined' ? localStorage.getItem("userEmail") : null
 
     if (storedEmail) {
       // If email exists in localStorage, send directly without showing dialog
@@ -61,10 +60,12 @@ export function ResourceCard({
 
         if ('success' in result && result.success === true) {
           // Store that this resource was sent
-          const sentResources = JSON.parse(localStorage.getItem("sentResources") || "[]")
-          if (!sentResources.includes(id)) {
-            sentResources.push(id)
-            localStorage.setItem("sentResources", JSON.stringify(sentResources))
+          if (typeof window !== 'undefined') {
+            const sentResources = JSON.parse(localStorage.getItem("sentResources") || "[]")
+            if (!sentResources.includes(id)) {
+              sentResources.push(id)
+              localStorage.setItem("sentResources", JSON.stringify(sentResources))
+            }
           }
 
           setIsSent(true)
@@ -86,10 +87,12 @@ export function ResourceCard({
 
   const handleDialogSuccess = () => {
     // Store that this resource was sent
-    const sentResources = JSON.parse(localStorage.getItem("sentResources") || "[]")
-    if (!sentResources.includes(id)) {
-      sentResources.push(id)
-      localStorage.setItem("sentResources", JSON.stringify(sentResources))
+    if (typeof window !== 'undefined') {
+      const sentResources = JSON.parse(localStorage.getItem("sentResources") || "[]")
+      if (!sentResources.includes(id)) {
+        sentResources.push(id)
+        localStorage.setItem("sentResources", JSON.stringify(sentResources))
+      }
     }
 
     setIsSent(true)
