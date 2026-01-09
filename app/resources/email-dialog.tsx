@@ -43,7 +43,7 @@ export function EmailDialog({ open, onOpenChange, resourceId, resourceTitle, onS
     try {
       const result = await sendResourcerEmail(email, resourceTitle, resourceId)
 
-      if (result.success) {
+      if ('success' in result && result.success === true) {
         // Store email in localStorage
         localStorage.setItem("userEmail", email)
 
@@ -54,7 +54,8 @@ export function EmailDialog({ open, onOpenChange, resourceId, resourceTitle, onS
         onOpenChange(false)
         onSuccess()
       } else {
-        toast.error("Failed to send email. Please try again.")
+        const errorMessage = 'message' in result ? result.message : 'Failed to send email. Please try again.'
+        toast.error(errorMessage)
       }
     } catch (error) {
       toast.error("An error occurred. Please try again.")

@@ -59,7 +59,7 @@ export function ResourceCard({
       try {
         const result = await sendResourcerEmail(storedEmail, title, id)
 
-        if (result.success) {
+        if ('success' in result && result.success === true) {
           // Store that this resource was sent
           const sentResources = JSON.parse(localStorage.getItem("sentResources") || "[]")
           if (!sentResources.includes(id)) {
@@ -70,7 +70,8 @@ export function ResourceCard({
           setIsSent(true)
           toast.success(`Resource will be sent to ${storedEmail}`)
         } else {
-          toast.error("Failed to send email. Please try again.")
+          const errorMessage = 'message' in result ? result.message : 'Failed to send email. Please try again.'
+          toast.error(errorMessage)
         }
       } catch (error) {
         toast.error("An error occurred. Please try again.")

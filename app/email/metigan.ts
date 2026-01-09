@@ -1,4 +1,5 @@
 import Metigan from 'metigan';
+import type { EmailApiResponse, EmailSuccessResponse } from 'metigan';
 
 import { template } from "./template";
 
@@ -7,6 +8,11 @@ import { template } from "./template";
 const metigan = new Metigan({
   apiKey: 'sp_63ace7496fb7692b6cace8f77d3d1bf8bc0db95cd944d498cbfc7679a1d5987b'
 });
+
+// Type guard para verificar se a resposta é bem-sucedida
+export function isEmailSuccess(response: EmailApiResponse): response is EmailSuccessResponse {
+  return 'success' in response && response.success === true;
+}
 
 
 
