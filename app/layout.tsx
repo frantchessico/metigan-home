@@ -13,6 +13,7 @@ import "./globals.css"
 import Image from "next/image"
 import GoogleAnalytics from "@/components/GoogleAnalytics"
 import { Suspense } from "react"
+import { BookOpen } from "lucide-react"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -68,8 +69,20 @@ export default function RootLayout({
                   </div>
 
                   {/* Actions */}
-                  <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-3">
                     <MobileNav />
+                    <Link
+                      href="https://docs.metigan.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={cn(
+                        buttonVariants({ variant: "outline", size: "sm" }),
+                        "hidden md:flex items-center gap-2 border-purple-500/50 text-purple-300 hover:bg-purple-500/10 hover:border-purple-400 hover:text-purple-200 px-4 py-2 transition-all duration-300 hover:scale-105",
+                      )}
+                    >
+                      <BookOpen className="h-4 w-4" />
+                      <span>Docs</span>
+                    </Link>
                     <Link
                       href="https://app.metigan.com"
                       className={cn(

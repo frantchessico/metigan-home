@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Menu, X } from "lucide-react"
+import { Menu, X, BookOpen } from "lucide-react"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
@@ -120,12 +120,25 @@ export default function MobileNav() {
                 </motion.div>
               ))}
 
-              <motion.div variants={itemVariants} className="pt-4">
+              <motion.div variants={itemVariants} className="pt-4 space-y-3">
+                <Link
+                  href="https://docs.metigan.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={cn(
+                    buttonVariants({ variant: "outline" }),
+                    "flex items-center justify-center gap-2 border-purple-500/50 text-purple-300 hover:bg-purple-500/10 hover:border-purple-400 hover:text-purple-200 w-full py-6 text-lg font-medium transition-all duration-300",
+                  )}
+                  onClick={() => setIsOpen(false)}
+                >
+                  <BookOpen className="h-5 w-5" />
+                  <span>Documentation</span>
+                </Link>
                 <Link
                   href="https://app.metigan.com"
                   className={cn(
                     buttonVariants(),
-                    "bg-gradient-to-r from-purple-600 to-purple-400 text-white hover:from-purple-500 hover:to-purple-300 w-full mt-4 py-6 text-lg font-medium transition-all duration-300 hover:shadow-[0_0_15px_rgba(168,85,247,0.5)]",
+                    "bg-gradient-to-r from-purple-600 to-purple-400 text-white hover:from-purple-500 hover:to-purple-300 w-full py-6 text-lg font-medium transition-all duration-300 hover:shadow-[0_0_15px_rgba(168,85,247,0.5)]",
                   )}
                   onClick={() => setIsOpen(false)}
                 >
