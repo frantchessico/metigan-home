@@ -30,6 +30,7 @@ export function MainNav() {
     { href: "/templates", label: "Templates" },
     { href: "/forms", label: "Forms" },
     { href: "/resources", label: "Resources" },
+    { href: "https://developers.metigan.com", label: "Developers", external: true },
   ]
 
   return (
@@ -42,6 +43,7 @@ export function MainNav() {
             className="relative"
             onMouseEnter={() => setHoveredIndex(index)}
             onMouseLeave={() => setHoveredIndex(null)}
+            {...(item.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
           >
             <span className={cn(textClass, "transition-colors font-medium relative z-10")}>{item.label}</span>
             {hoveredIndex === index && (

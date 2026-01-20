@@ -138,7 +138,7 @@ export function FaqSection() {
                 >
                   <AccordionItem
                     value={`item-${index}`}
-                    className="backdrop-blur-sm bg-white/5 border border-indigo-500/20 rounded-lg overflow-hidden mb-4"
+                    className="glass-panel-dark border border-indigo-500/20 rounded-lg overflow-hidden mb-4"
                   >
                     <AccordionTrigger className="text-left hover:text-indigo-300 text-white px-6 py-4 transition-colors duration-300">
                       {faq.question}

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { motion } from "framer-motion"
 import { Check, CheckCircle, Mail, Zap, Clock, BarChart3, Code, Globe, Users, MessageSquare, Phone } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -9,6 +9,24 @@ import { useRouter } from "next/navigation"
 export default function PricingPage() {
   const [billingCycle, setBillingCycle] = useState<"monthly" | "yearly">("monthly")
   const router = useRouter()
+  const [plans, setPlans] = useState(DEFAULT_PLANS)
+
+  useEffect(() => {
+    const apiBase = process.env.NEXT_PUBLIC_APP_URL || "https://app.metigan.com"
+    fetch(`${apiBase}/api/plans`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data?.success && Array.isArray(data.plans) && data.plans.length > 0) {
+          setPlans(data.plans)
+        }
+      })
+      .catch(() => undefined)
+  }, [])
+
+  const orderedPlans = useMemo(
+    () => [...plans].sort((a, b) => (a.sortOrder ?? 0) - (b.sortOrder ?? 0)),
+    [plans],
+  )
 
   return (
     <section className="relative w-full overflow-hidden py-24">
@@ -105,131 +123,62 @@ export default function PricingPage() {
             transition={{ duration: 0.7, delay: 0.8 }}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8"
           >
-            {/* Free Plan */}
-            <div className="rounded-xl border border-purple-500/20 bg-black/40 backdrop-blur-sm p-8 transition-all duration-300 hover:border-purple-500/40 hover:bg-black/50 flex flex-col h-full">
-              <div className="flex-1">
-                <h3 className="text-2xl font-bold text-white">Free</h3>
-                <p className="mt-2 text-sm text-purple-100/80">For personal projects and small businesses</p>
-                <div className="mt-6 mb-8">
-                  <span className="text-5xl font-bold text-white">$0.00</span>
-                </div>
-                <ul className="space-y-5">
-                  {freeFeatures.map((feature, index) => (
-                    <li key={index} className="flex items-start">
-                      <Check className="h-5 w-5 text-purple-400 mr-3 flex-shrink-0 mt-0.5" />
-                      <span className="text-sm text-purple-100">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="mt-10">
-                <Button
-                  onClick={() => (window.location.href = "https://app.metigan.com")}
-                  className="w-full bg-white/10 hover:bg-white/20 text-white py-6 text-base"
-                >
-                  Get Started
-                </Button>
-              </div>
-            </div>
+            {orderedPlans.map((plan) => {
+              const monthly = plan.priceMonthly ?? plan.price ?? 0
+              const yearly = plan.priceYearly ?? Number((monthly * 0.8).toFixed(2))
+              const isFeatured = plan.featured ?? plan.popular ?? false
+              const price = billingCycle === "monthly" ? monthly : yearly
 
-            {/* Pro Plan */}
-            <div className="rounded-xl border-2 border-purple-500 bg-black/60 backdrop-blur-sm p-8 transition-all duration-300 hover:bg-black/70 flex flex-col h-full relative">
-              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-purple-600 to-purple-400 text-white text-sm font-medium py-1.5 px-6 rounded-full">
-                Most Popular
-              </div>
-              <div className="flex-1">
-                <h3 className="text-2xl font-bold text-white">Pro</h3>
-                <p className="mt-2 text-sm text-purple-100/80">For growing businesses with advanced needs</p>
-                <div className="mt-6 mb-8 flex items-baseline">
-                  <span className="text-5xl font-bold text-white">
-                    ${billingCycle === "monthly" ? "16.00" : "12.80"}
-                  </span>
-                  <span className="ml-2 text-sm text-purple-100/80">
-                    /{billingCycle === "monthly" ? "month" : "month, billed yearly"}
-                  </span>
-                </div>
-                <ul className="space-y-5">
-                  {proFeatures.map((feature, index) => (
-                    <li key={index} className="flex items-start">
-                      <Check className="h-5 w-5 text-purple-400 mr-3 flex-shrink-0 mt-0.5" />
-                      <span className="text-sm text-purple-100">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="mt-10">
-                <Button
-                  onClick={() => (window.location.href = "https://app.metigan.com")}
-                  className="w-full bg-gradient-to-r from-purple-600 to-purple-400 text-white hover:from-purple-500 hover:to-purple-300 py-6 text-base"
+              return (
+                <div
+                  key={plan.tier}
+                  className={[
+                    "rounded-xl backdrop-blur-sm p-8 transition-all duration-300 flex flex-col h-full",
+                    isFeatured
+                      ? "border-2 border-purple-500 bg-black/60 hover:bg-black/70 relative"
+                      : "border border-purple-500/20 bg-black/40 hover:border-purple-500/40 hover:bg-black/50",
+                  ].join(" ")}
                 >
-                  Get Started
-                </Button>
-              </div>
-            </div>
-
-            {/* Growth Plan */}
-            <div className="rounded-xl border border-purple-500/20 bg-black/40 backdrop-blur-sm p-8 transition-all duration-300 hover:border-purple-500/40 hover:bg-black/50 flex flex-col h-full">
-              <div className="flex-1">
-                <h3 className="text-2xl font-bold text-white">Growth</h3>
-                <p className="mt-2 text-sm text-purple-100/80">For scaling businesses with higher volume</p>
-                <div className="mt-6 mb-8 flex items-baseline">
-                  <span className="text-5xl font-bold text-white">
-                    ${billingCycle === "monthly" ? "49.00" : "39.20"}
-                  </span>
-                  <span className="ml-2 text-sm text-purple-100/80">
-                    /{billingCycle === "monthly" ? "month" : "month, billed yearly"}
-                  </span>
+                  {isFeatured && (
+                    <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-purple-600 to-purple-400 text-white text-sm font-medium py-1.5 px-6 rounded-full">
+                      Most Popular
+                    </div>
+                  )}
+                  <div className="flex-1">
+                    <h3 className="text-2xl font-bold text-white">{plan.name}</h3>
+                    <p className="mt-2 text-sm text-purple-100/80">{plan.description}</p>
+                    <div className="mt-6 mb-8 flex items-baseline">
+                      <span className="text-5xl font-bold text-white">${price.toFixed(2)}</span>
+                      {price > 0 && (
+                        <span className="ml-2 text-sm text-purple-100/80">
+                          /{billingCycle === "monthly" ? "month" : "month, billed yearly"}
+                        </span>
+                      )}
+                    </div>
+                    <ul className="space-y-5">
+                      {(plan.features || []).map((feature: string, index: number) => (
+                        <li key={index} className="flex items-start">
+                          <Check className="h-5 w-5 text-purple-400 mr-3 flex-shrink-0 mt-0.5" />
+                          <span className="text-sm text-purple-100">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="mt-10">
+                    <Button
+                      onClick={() => (window.location.href = "https://app.metigan.com")}
+                      className={
+                        isFeatured
+                          ? "w-full bg-gradient-to-r from-purple-600 to-purple-400 text-white hover:from-purple-500 hover:to-purple-300 py-6 text-base"
+                          : "w-full bg-white/10 hover:bg-white/20 text-white py-6 text-base"
+                      }
+                    >
+                      Get Started
+                    </Button>
+                  </div>
                 </div>
-                <ul className="space-y-5">
-                  {growthFeatures.map((feature, index) => (
-                    <li key={index} className="flex items-start">
-                      <Check className="h-5 w-5 text-purple-400 mr-3 flex-shrink-0 mt-0.5" />
-                      <span className="text-sm text-purple-100">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="mt-10">
-                <Button
-                  onClick={() => (window.location.href = "https://app.metigan.com")}
-                  className="w-full bg-white/10 hover:bg-white/20 text-white py-6 text-base"
-                >
-                  Get Started
-                </Button>
-              </div>
-            </div>
-
-            {/* Business Plan */}
-            <div className="rounded-xl border border-purple-500/20 bg-black/40 backdrop-blur-sm p-8 transition-all duration-300 hover:border-purple-500/40 hover:bg-black/50 flex flex-col h-full">
-              <div className="flex-1">
-                <h3 className="text-2xl font-bold text-white">Business</h3>
-                <p className="mt-2 text-sm text-purple-100/80">For large businesses with high volume needs</p>
-                <div className="mt-6 mb-8 flex items-baseline">
-                  <span className="text-5xl font-bold text-white">
-                    ${billingCycle === "monthly" ? "150.00" : "120.00"}
-                  </span>
-                  <span className="ml-2 text-sm text-purple-100/80">
-                    /{billingCycle === "monthly" ? "month" : "month, billed yearly"}
-                  </span>
-                </div>
-                <ul className="space-y-5">
-                  {businessFeatures.map((feature, index) => (
-                    <li key={index} className="flex items-start">
-                      <Check className="h-5 w-5 text-purple-400 mr-3 flex-shrink-0 mt-0.5" />
-                      <span className="text-sm text-purple-100">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="mt-10">
-                <Button
-                  onClick={() => (window.location.href = "https://app.metigan.com")}
-                  className="w-full bg-white/10 hover:bg-white/20 text-white py-6 text-base"
-                >
-                  Get Started
-                </Button>
-              </div>
-            </div>
+              )
+            })}
           </motion.div>
 
           {/* Features section */}
@@ -312,54 +261,85 @@ export default function PricingPage() {
   )
 }
 
-// Free plan features
-const freeFeatures = [
-  "3,000 emails per month",
-  "5,000 contacts",
-  "1 Domain",
-  "No daily limit",
-  "Basic templates",
-  "Email support",
-]
-
-// Pro plan features
-const proFeatures = [
-  "65,000 emails per month",
-  "85,000 contacts",
-  "15 Domains",
-  "35 Senders",
-  "API access",
-  "No daily limit",
-  "Detailed analytics",
-  "Email & chat support",
-]
-
-// Growth plan features
-const growthFeatures = [
-  "225,000 emails per month",
-  "300,000 contacts",
-  "50 Domains",
-  "150 Senders",
-  "API access",
-  "Smart scheduling & workflows",
-  "Advanced analytics",
-  "No daily limit",
-  "Priority email & chat support",
-  "Segmented audiences",
-]
-
-// Business plan features
-const businessFeatures = [
-  "700,000 emails per month",
-  "Unlimited contacts",
-  "1,500 Domains",
-  "2,500 Senders",
-  "API access",
-  "Dedicated IP add-on",
-  "Advanced analytics",
-  "No daily limit",
-  "Priority email support",
-  "Account manager",
+const DEFAULT_PLANS = [
+  {
+    tier: "free",
+    name: "Free",
+    priceMonthly: 0,
+    priceYearly: 0,
+    description: "For personal projects and small businesses",
+    features: [
+      "3,000 emails per month",
+      "5,000 contacts",
+      "1 Domain",
+      "No daily limit",
+      "Basic templates",
+      "Email support",
+    ],
+    featured: false,
+    sortOrder: 0,
+  },
+  {
+    tier: "pro",
+    name: "Pro",
+    priceMonthly: 16,
+    priceYearly: 12.8,
+    description: "For growing businesses with advanced needs",
+    features: [
+      "65,000 emails per month",
+      "85,000 contacts",
+      "15 Domains",
+      "35 Senders",
+      "API access",
+      "No daily limit",
+      "Detailed analytics",
+      "Email & chat support",
+    ],
+    featured: true,
+    sortOrder: 1,
+  },
+  {
+    tier: "growth",
+    name: "Growth",
+    priceMonthly: 49,
+    priceYearly: 39.2,
+    description: "For scaling businesses with higher volume",
+    features: [
+      "225,000 emails per month",
+      "300,000 contacts",
+      "50 Domains",
+      "150 Senders",
+      "API access",
+      "Smart scheduling & workflows",
+      "Advanced analytics",
+      "No daily limit",
+      "Priority email & chat support",
+      "Segmented audiences",
+    ],
+    featured: false,
+    sortOrder: 2,
+  },
+  {
+    tier: "business",
+    name: "Business",
+    priceMonthly: 150,
+    priceYearly: 120,
+    description: "For large businesses with high volume needs",
+    features: [
+      "700,000 emails per month",
+      "Unlimited contacts",
+      "1,500 Domains",
+      "2,500 Senders",
+      "API access",
+      "Dedicated IP add-on",
+      "Advanced analytics",
+      "No daily limit",
+      "Priority email support",
+      "Account manager",
+    ],
+    featured: false,
+    sortOrder: 3,
+  },
 ]
 
 // Email features

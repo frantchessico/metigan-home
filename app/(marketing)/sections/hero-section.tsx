@@ -310,7 +310,7 @@ export function HeroSection() {
                     isEmailFocused ? "bg-gradient-to-r from-purple-500 to-purple-300" : "bg-white/10",
                   )}
                 >
-                  <div className="relative flex flex-col sm:flex-row items-center rounded-lg bg-black/80 backdrop-blur-sm">
+                  <div className="relative flex flex-col sm:flex-row items-center rounded-lg glass-panel-dark">
                     <Input
                       type="email"
                       placeholder="Enter your email address"
@@ -357,7 +357,7 @@ export function HeroSection() {
             {features.map((feature, index) => (
               <div
                 key={index}
-                className="rounded-xl border border-purple-500/20 bg-black/40 backdrop-blur-sm p-4 sm:p-6 transition-all duration-300 hover:border-purple-500/40 hover:bg-black/50"
+                className="rounded-xl glass-panel-dark p-4 sm:p-6 transition-all duration-300 hover:border-purple-500/40 hover:bg-white/10"
               >
                 <div className="mb-3 sm:mb-4 flex h-10 sm:h-12 w-10 sm:w-12 items-center justify-center rounded-lg bg-purple-500/20">
                   <feature.icon className="h-5 w-5 sm:h-6 sm:w-6 text-purple-300" />

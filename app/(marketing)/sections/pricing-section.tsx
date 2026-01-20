@@ -1,4 +1,5 @@
 "use client"
+import { useEffect, useState } from "react"
 import { Check } from "lucide-react"
 import ShineBorder from "@/components/magicui/shine-border"
 import { Button } from "@/components/ui/button"
@@ -6,6 +7,27 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { cn } from "@/lib/utils"
 
 export function PricingSection() {
+  const [plans, setPlans] = useState(pricingPlans)
+
+  useEffect(() => {
+    const apiBase = process.env.NEXT_PUBLIC_APP_URL || "https://app.metigan.com"
+    fetch(`${apiBase}/api/plans`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data?.success && Array.isArray(data.plans) && data.plans.length > 0) {
+          setPlans(
+            data.plans.map((plan: any) => ({
+              ...plan,
+              price: plan.priceMonthly ?? plan.price ?? 0,
+              featured: plan.featured ?? plan.popular ?? false,
+              features: plan.features || [],
+            })),
+          )
+        }
+      })
+      .catch(() => undefined)
+  }, [])
+
   const handleClick = () => {
     return (window.location.href = "https://app.metigan.com")
   }
@@ -27,11 +49,11 @@ export function PricingSection() {
 
       {/* Updated grid to handle 4 cards properly */}
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-6 mt-8 sm:mt-10 md:mt-12">
-        {pricingPlans.map((plan) => (
+        {plans.map((plan) => (
           <Card
             key={plan.name}
             className={cn(
-              "flex flex-col transition-all duration-300 hover:shadow-lg hover:-translate-y-1",
+              "flex flex-col glass-card transition-all duration-300 hover:shadow-2xl hover:-translate-y-1",
               plan.featured
                 ? "border-primary shadow-md bg-primary/5 dark:bg-primary/10 order-first sm:order-none"
                 : "hover:border-primary/30",

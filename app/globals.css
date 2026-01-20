@@ -145,6 +145,24 @@
     }
   }
   
+  @layer components {
+    .glass-panel {
+      @apply backdrop-blur-md border border-white/20 bg-white/70 shadow-lg dark:bg-white/10 dark:border-white/15;
+    }
+
+    .glass-panel-dark {
+      @apply backdrop-blur-md border border-white/10 bg-white/5 shadow-lg;
+    }
+
+    .glass-card {
+      @apply backdrop-blur-md border border-white/20 bg-white/60 shadow-[0_12px_32px_rgba(15,23,42,0.12)] dark:bg-white/10 dark:border-white/10;
+    }
+
+    .gradient-surface {
+      @apply bg-gradient-to-br from-purple-500/10 via-transparent to-blue-500/10;
+    }
+  }
+
   /* Custom hover effects */
   .hover-lift {
     transition: transform 0.3s ease, box-shadow 0.3s ease;

@@ -39,11 +39,11 @@ export function FeaturesWithImages() {
           {features.map((feature, index) => (
             <Card
               key={feature.title}
-              className="group relative border border-border/50 bg-gradient-to-b from-background to-background/80 backdrop-blur-sm transition-all duration-300"
+              className="group relative glass-card transition-all duration-300 hover:shadow-2xl"
               onMouseEnter={() => setHoveredCard(index)}
               onMouseLeave={() => setHoveredCard(null)}
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute inset-0 gradient-surface opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
               <div className="relative h-56 overflow-hidden rounded-t-lg">
                 <div className="absolute inset-0 bg-black/20 z-10 group-hover:bg-black/10 transition-colors duration-300" />

@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Menu, X, BookOpen } from "lucide-react"
+import { Menu, X } from "lucide-react"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
@@ -56,6 +56,7 @@ export default function MobileNav() {
     { href: "/templates", label: "Templates" },
     { href: "/forms", label: "Forms" },
     { href: "/resources", label: "Resources" },
+    { href: "https://developers.metigan.com", label: "Developers", external: true },
   ]
 
   const menuVariants = {
@@ -105,12 +106,13 @@ export default function MobileNav() {
             variants={menuVariants}
           >
             <motion.nav className="container flex flex-col space-y-6 p-8 pt-12">
-              {navItems.map((item, i) => (
+              {navItems.map((item) => (
                 <motion.div key={item.href} variants={itemVariants}>
                   <Link
                     href={item.href}
                     className="flex items-center text-xl font-medium text-foreground/80 hover:text-foreground transition-colors"
                     onClick={() => setIsOpen(false)}
+                    {...(item.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                   >
                     <span className="relative overflow-hidden group">
                       {item.label}
@@ -121,19 +123,6 @@ export default function MobileNav() {
               ))}
 
               <motion.div variants={itemVariants} className="pt-4 space-y-3">
-                <Link
-                  href="https://docs.metigan.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={cn(
-                    buttonVariants({ variant: "outline" }),
-                    "flex items-center justify-center gap-2 border-purple-500/50 text-purple-300 hover:bg-purple-500/10 hover:border-purple-400 hover:text-purple-200 w-full py-6 text-lg font-medium transition-all duration-300",
-                  )}
-                  onClick={() => setIsOpen(false)}
-                >
-                  <BookOpen className="h-5 w-5" />
-                  <span>Documentation</span>
-                </Link>
                 <Link
                   href="https://app.metigan.com"
                   className={cn(

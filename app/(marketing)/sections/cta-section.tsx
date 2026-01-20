@@ -157,7 +157,7 @@ export function CtaSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.4 }}
           >
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+            <div className="glass-panel-dark rounded-2xl p-6">
               <h3 className="text-white text-lg font-medium flex items-center justify-center gap-2 mb-4">
                 <Mail className="h-5 w-5" /> Subscribe to our newsletter
               </h3>
