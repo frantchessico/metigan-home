@@ -124,9 +124,9 @@ export default function PricingPage() {
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8"
           >
             {orderedPlans.map((plan) => {
-              const monthly = plan.priceMonthly ?? plan.price ?? 0
+              const monthly = plan.priceMonthly ?? 0
               const yearly = plan.priceYearly ?? Number((monthly * 0.8).toFixed(2))
-              const isFeatured = plan.featured ?? plan.popular ?? false
+              const isFeatured = plan.featured ?? false
               const price = billingCycle === "monthly" ? monthly : yearly
 
               return (
