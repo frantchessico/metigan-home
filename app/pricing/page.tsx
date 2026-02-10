@@ -165,7 +165,10 @@ export default function PricingPage() {
                   </div>
                   <div className="mt-10">
                     <Button
-                      onClick={() => (window.location.href = "https://app.metigan.com")}
+                      onClick={() => {
+                        const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://app.metigan.com"
+                        window.location.href = `${appUrl}/billing/subscriptions?plan=${plan.tier ?? "free"}`
+                      }}
                       className={
                         isFeatured
                           ? "w-full bg-gradient-to-r from-purple-600 to-purple-400 text-white hover:from-purple-500 hover:to-purple-300 py-6 text-base"

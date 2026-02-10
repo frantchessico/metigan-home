@@ -28,8 +28,9 @@ export function PricingSection() {
       .catch(() => undefined)
   }, [])
 
-  const handleClick = () => {
-    return (window.location.href = "https://app.metigan.com")
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://app.metigan.com"
+  const handleClick = (tier: string) => {
+    window.location.href = `${appUrl}/billing/subscriptions?plan=${tier}`
   }
 
   return (
@@ -100,7 +101,7 @@ export function PricingSection() {
                     ? "hover:bg-primary/90 hover:shadow-md"
                     : "hover:bg-primary/10 hover:text-primary hover:border-primary",
                 )}
-                onClick={handleClick}
+                onClick={() => handleClick(plan.tier ?? "free")}
               >
                 Get Started
               </Button>
