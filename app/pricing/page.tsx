@@ -111,8 +111,7 @@ export default function PricingPage() {
               transition={{ duration: 0.7, delay: 0.4 }}
               className="mt-6 max-w-[42rem] leading-normal text-purple-100 sm:text-xl sm:leading-8"
             >
-              Choose the perfect plan for your email marketing needs. Scale as you grow with our flexible pricing
-              options.
+              Simple pricing for transactional email via API. Scale as you grow.
             </motion.p>
           </div>
 
@@ -261,19 +260,20 @@ export default function PricingPage() {
   )
 }
 
+/** Fallback when /api/plans is unavailable. Aligned with PRICING_AND_POSITIONING_STRATEGY. */
 const DEFAULT_PLANS = [
   {
     tier: "free",
     name: "Free",
     priceMonthly: 0,
     priceYearly: 0,
-    description: "For personal projects and small businesses",
+    description: "For personal projects and testing",
     features: [
       "3,000 emails per month",
-      "5,000 contacts",
-      "1 Domain",
-      "No daily limit",
-      "Basic templates",
+      "1 domain",
+      "~100 emails/day",
+      "3 days data retention",
+      "Transactional API",
       "Email support",
     ],
     featured: false,
@@ -282,18 +282,16 @@ const DEFAULT_PLANS = [
   {
     tier: "pro",
     name: "Pro",
-    priceMonthly: 16,
-    priceYearly: 12.8,
-    description: "For growing businesses with advanced needs",
+    priceMonthly: 19,
+    priceYearly: 15.2,
+    description: "For growing apps with higher volume",
     features: [
-      "65,000 emails per month",
-      "85,000 contacts",
-      "15 Domains",
-      "35 Senders",
+      "50,000 emails per month",
+      "3 domains",
+      "7 days data retention",
       "API access",
-      "No daily limit",
-      "Detailed analytics",
-      "Email & chat support",
+      "Logs & monitoring",
+      "Email support",
     ],
     featured: true,
     sortOrder: 1,
@@ -301,20 +299,16 @@ const DEFAULT_PLANS = [
   {
     tier: "growth",
     name: "Growth",
-    priceMonthly: 49,
-    priceYearly: 39.2,
-    description: "For scaling businesses with higher volume",
+    priceMonthly: 59,
+    priceYearly: 47.2,
+    description: "For scaling transactional volume",
     features: [
-      "225,000 emails per month",
-      "300,000 contacts",
-      "50 Domains",
-      "150 Senders",
+      "100,000 emails per month",
+      "10 domains",
+      "30 days data retention",
       "API access",
-      "Smart scheduling & workflows",
       "Advanced analytics",
-      "No daily limit",
-      "Priority email & chat support",
-      "Segmented audiences",
+      "Priority support",
     ],
     featured: false,
     sortOrder: 2,
@@ -322,19 +316,15 @@ const DEFAULT_PLANS = [
   {
     tier: "business",
     name: "Business",
-    priceMonthly: 150,
-    priceYearly: 120,
-    description: "For large businesses with high volume needs",
+    priceMonthly: 149,
+    priceYearly: 119.2,
+    description: "For high volume and compliance",
     features: [
-      "700,000 emails per month",
-      "Unlimited contacts",
-      "1,500 Domains",
-      "2,500 Senders",
+      "200,000 emails per month",
+      "Unlimited domains",
+      "90 days data retention",
       "API access",
-      "Dedicated IP add-on",
-      "Advanced analytics",
-      "No daily limit",
-      "Priority email support",
+      "Dedicated support",
       "Account manager",
     ],
     featured: false,

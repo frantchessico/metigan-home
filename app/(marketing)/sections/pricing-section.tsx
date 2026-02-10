@@ -43,7 +43,7 @@ export function PricingSection() {
           Simple, Transparent Pricing
         </h2>
         <p className="max-w-[95%] sm:max-w-[85%] leading-normal text-muted-foreground text-sm sm:text-base md:text-lg sm:leading-7">
-          Choose the perfect plan for your email marketing needs. Scale as you grow with our flexible pricing options.
+          Simple pricing for transactional email via API. Scale as you grow.
         </p>
       </div>
 
@@ -112,95 +112,70 @@ export function PricingSection() {
   )
 }
 
+/** Fallback when /api/plans is unavailable. Aligned with PRICING_AND_POSITIONING_STRATEGY. */
 const pricingPlans = [
   {
     tier: "free",
     name: "Free",
     price: 0,
-    description: "For personal projects and small businesses",
+    description: "For personal projects and testing",
     features: [
       "3,000 emails per month",
-      "5,000 contacts",
-      "1 Domain",
-      "No daily limit",
-      "Basic templates",
+      "1 domain",
+      "~100 emails/day",
+      "3 days data retention",
+      "Transactional API",
       "Email support",
     ],
-    limits: {
-      emails: 3000,
-      contacts: 5000,
-      apiCalls: 1000,
-    },
+    limits: { emails: 3000, contacts: 5000, apiCalls: 1000 },
     featured: false,
   },
   {
     tier: "pro",
     name: "Pro",
-    price: 16,
-    description: "For growing businesses with advanced needs",
+    price: 19,
+    description: "For growing apps with higher volume",
     features: [
-      "65,000 emails per month",
-      "85,000 contacts",
-      "15 Domains",
-      "35 Senders",
+      "50,000 emails per month",
+      "3 domains",
+      "7 days data retention",
       "API access",
-      "No daily limit",
-      "Detailed analytics",
-      "Email & chat support",
+      "Logs & monitoring",
+      "Email support",
     ],
-    limits: {
-      emails: 65000,
-      contacts: 85000,
-      apiCalls: 20000,
-    },
+    limits: { emails: 50000, contacts: 50000, apiCalls: 20000 },
     featured: true,
   },
   {
     tier: "growth",
     name: "Growth",
-    price: 49,
-    description: "For scaling businesses with higher volume",
+    price: 59,
+    description: "For scaling transactional volume",
     features: [
-      "225,000 emails per month",
-      "300,000 contacts",
-      "50 Domains",
-      "150 Senders",
+      "100,000 emails per month",
+      "10 domains",
+      "30 days data retention",
       "API access",
-      "Smart scheduling & workflows",
       "Advanced analytics",
-      "No daily limit",
-      "Priority email & chat support",
-      "Segmented audiences",
+      "Priority support",
     ],
-    limits: {
-      emails: 225000,
-      contacts: 300000,
-      apiCalls: 60000,
-    },
+    limits: { emails: 100000, contacts: 100000, apiCalls: 60000 },
     featured: false,
   },
   {
     tier: "business",
     name: "Business",
-    price: 150,
-    description: "For large businesses with high volume needs",
+    price: 149,
+    description: "For high volume and compliance",
     features: [
-      "700,000 emails per month",
-      "Unlimited contacts",
-      "1,500 Domains",
-      "2,500 Senders",
+      "200,000 emails per month",
+      "Unlimited domains",
+      "90 days data retention",
       "API access",
-      "Dedicated IP add-on",
-      "Advanced analytics",
-      "No daily limit",
-      "Priority email support",
+      "Dedicated support",
       "Account manager",
     ],
-    limits: {
-      emails: 700000,
-      contacts: Number.POSITIVE_INFINITY,
-      apiCalls: 100000,
-    },
+    limits: { emails: 200000, contacts: Infinity, apiCalls: 100000 },
     featured: false,
   },
 ]
