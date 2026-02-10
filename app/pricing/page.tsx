@@ -277,6 +277,7 @@ const DEFAULT_PLANS = [
       "~100 emails/day",
       "3 days data retention",
       "Transactional API",
+      "Basic metrics only (no Advanced analytics)",
       "Email support",
     ],
     featured: false,

@@ -126,6 +126,7 @@ const pricingPlans = [
       "~100 emails/day",
       "3 days data retention",
       "Transactional API",
+      "Basic metrics only (no Advanced analytics)",
       "Email support",
     ],
     limits: { emails: 3000, contacts: 5000, apiCalls: 1000 },
