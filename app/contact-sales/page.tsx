@@ -56,7 +56,7 @@ export default function ContactSalesPage() {
       })
 
       // Also implementing with axios as requested
-      // const response = await axios.post("https://f.metigan.com/f/api/submissions", {
+      // const response = await axios.post("https://f.metigan.io/f/api/submissions", {
       //   formId: "contact-sales",
       //   data: formState,
       // })
@@ -410,7 +410,7 @@ export default function ContactSalesPage() {
                       <h4 className="text-white font-medium">Email Us</h4>
                       <p className="text-purple-100/80 text-sm">We'll respond within 24 hours</p>
                       <a href="mailto:sales@example.com" className="text-purple-300 hover:underline">
-                        sales@metigan.com
+                        sales@metigan.io
                       </a>
                     </div>
                   </div>

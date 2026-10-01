@@ -153,7 +153,7 @@ export function HeroSection() {
 
                 <Button
                   className="w-full bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-black font-bold text-base py-6"
-                  onClick={() => (window.location.href = "https://app.metigan.com/")}
+                  onClick={() => (window.location.href = "https://app.metigan.io/")}
                 >
                   <span>Start now</span>
                   <ArrowRight className="ml-2 h-5 w-5" />

@@ -56,7 +56,7 @@ export default function MobileNav() {
     { href: "/templates", label: "Templates" },
     { href: "/forms", label: "Forms" },
     { href: "/resources", label: "Resources" },
-    { href: "https://developers.metigan.com", label: "Developers", external: true },
+    { href: "https://developers.metigan.io", label: "Developers", external: true },
   ]
 
   const menuVariants = {
@@ -124,7 +124,7 @@ export default function MobileNav() {
 
               <motion.div variants={itemVariants} className="pt-4 space-y-3">
                 <Link
-                  href="https://app.metigan.com"
+                  href="https://app.metigan.io"
                   className={cn(
                     buttonVariants(),
                     "bg-gradient-to-r from-purple-600 to-purple-400 text-white hover:from-purple-500 hover:to-purple-300 w-full py-6 text-lg font-medium transition-all duration-300 hover:shadow-[0_0_15px_rgba(168,85,247,0.5)]",

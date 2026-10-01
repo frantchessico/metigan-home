@@ -30,7 +30,7 @@ export function MainNav() {
     { href: "/templates", label: "Templates" },
     { href: "/forms", label: "Forms" },
     { href: "/resources", label: "Resources" },
-    { href: "https://developers.metigan.com", label: "Developers", external: true },
+    { href: "https://developers.metigan.io", label: "Developers", external: true },
   ]
 
   return (

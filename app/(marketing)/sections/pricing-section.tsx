@@ -10,7 +10,7 @@ export function PricingSection() {
   const [plans, setPlans] = useState(pricingPlans)
 
   useEffect(() => {
-    const apiBase = process.env.NEXT_PUBLIC_APP_URL || "https://app.metigan.com"
+    const apiBase = process.env.NEXT_PUBLIC_APP_URL || "https://app.metigan.io"
     fetch(`${apiBase}/api/plans`)
       .then((res) => res.json())
       .then((data) => {
@@ -28,7 +28,7 @@ export function PricingSection() {
       .catch(() => undefined)
   }, [])
 
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://app.metigan.com"
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://app.metigan.io"
   const handleClick = (tier: string) => {
     window.location.href = `${appUrl}/billing/subscriptions?plan=${tier}`
   }

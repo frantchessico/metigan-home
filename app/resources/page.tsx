@@ -313,7 +313,7 @@ export default function ResourcesPage() {
                   </p>
                 </CardContent>
                 <CardFooter className="flex justify-center">
-                  <Button onClick={() => window.location.href = 'https://f.metigan.com/f/dCItFHQqoe'} className="bg-white/10 hover:bg-white/20 text-white">Get in Touch</Button>
+                  <Button onClick={() => window.location.href = 'https://f.metigan.io/f/dCItFHQqoe'} className="bg-white/10 hover:bg-white/20 text-white">Get in Touch</Button>
                 </CardFooter>
               </Card>
 

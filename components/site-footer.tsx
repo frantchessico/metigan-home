@@ -87,7 +87,7 @@ export function SiteFooter() {
               <Phone className="h-4 w-4 text-purple-400" /> (800) 123-4567
             </p> */}
             <p className="text-sm text-purple-100/70 flex items-center gap-2">
-              <Mail className="h-4 w-4 text-purple-400" /> developers@metigan.com
+              <Mail className="h-4 w-4 text-purple-400" /> developers@metigan.io
             </p>
           </div>
         </div>

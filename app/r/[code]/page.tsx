@@ -5,7 +5,7 @@ import { useParams, useRouter } from "next/navigation";
 import { Gift, Loader2, CheckCircle, Sparkles, XCircle } from "lucide-react";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://savanapoint-metigan.kwbhel.easypanel.host/api";
-const SIGNUP_URL = process.env.NEXT_PUBLIC_SIGNUP_URL || "https://app.metigan.com/sign-up";
+const SIGNUP_URL = process.env.NEXT_PUBLIC_SIGNUP_URL || "https://app.metigan.io/sign-up";
 
 export default function ReferralPage() {
   const params = useParams();

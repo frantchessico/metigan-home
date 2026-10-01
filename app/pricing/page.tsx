@@ -12,7 +12,7 @@ export default function PricingPage() {
   const [plans, setPlans] = useState(DEFAULT_PLANS)
 
   useEffect(() => {
-    const apiBase = process.env.NEXT_PUBLIC_APP_URL || "https://app.metigan.com"
+    const apiBase = process.env.NEXT_PUBLIC_APP_URL || "https://app.metigan.io"
     fetch(`${apiBase}/api/plans`)
       .then((res) => res.json())
       .then((data) => {
@@ -166,7 +166,7 @@ export default function PricingPage() {
                   <div className="mt-10">
                     <Button
                       onClick={() => {
-                        const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://app.metigan.com"
+                        const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://app.metigan.io"
                         window.location.href = `${appUrl}/billing/subscriptions?plan=${plan.tier ?? "free"}`
                       }}
                       className={
@@ -225,7 +225,7 @@ export default function PricingPage() {
               </p>
               <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
                 <Button
-                  onClick={() => (window.location.href = "https://app.metigan.com")}
+                  onClick={() => (window.location.href = "https://app.metigan.io")}
                   className="bg-gradient-to-r from-purple-600 to-purple-400 text-white hover:from-purple-500 hover:to-purple-300 py-6 px-8 text-base"
                 >
                   Start For Free
