@@ -1,144 +1,108 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
-import { Gift, Loader2, CheckCircle, Sparkles, XCircle } from "lucide-react";
+import { useParams } from "next/navigation";
+import { Gift, Loader2, ArrowRight } from "lucide-react";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://savanapoint-metigan.kwbhel.easypanel.host/api";
+// Go API (public route, no account needed). NEXT_PUBLIC_API_URL pointed at
+// the retired Node host, so it is not used here.
+const API_URL = process.env.NEXT_PUBLIC_METIGAN_API_URL || "https://api.metigan.io/api/v2";
 const SIGNUP_URL = process.env.NEXT_PUBLIC_SIGNUP_URL || "https://app.metigan.io/sign-up";
+
+type State = { status: "checking" } | { status: "valid"; bonus: number } | { status: "invalid" };
 
 export default function ReferralPage() {
   const params = useParams();
-  const router = useRouter();
-  const code = (params?.code as string) || "";
-  const [status, setStatus] = useState<"validating" | "valid" | "invalid">("validating");
-  const [bonusCredits, setBonusCredits] = useState(250);
-  const [errorMessage, setErrorMessage] = useState("");
+  const code = String(params?.code || "").trim();
+  const [state, setState] = useState<State>({ status: "checking" });
+  const signup = `${SIGNUP_URL}?ref=${encodeURIComponent(code)}`;
 
   useEffect(() => {
-    async function validateAndRedirect() {
-      try {
-        // Validate the referral code
-        const response = await fetch(`${API_URL}/referrals/validate/${code}`);
-        const data = await response.json();
-
-        if (data.valid) {
-          setStatus("valid");
-          setBonusCredits(data.bonusCredits || 250);
-
-          // Store the referral code in localStorage and cookie
-          if (typeof window !== "undefined") {
-            localStorage.setItem("referralCode", code);
-            document.cookie = `referralCode=${code}; path=/; max-age=${60 * 60 * 24 * 30}; SameSite=Lax`; // 30 days
-          }
-
-          // Redirect to signup after 2 seconds
-          setTimeout(() => {
-            window.location.href = `${SIGNUP_URL}?ref=${code}`;
-          }, 2500);
+    if (!code) {
+      setState({ status: "invalid" });
+      return;
+    }
+    let alive = true;
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    const go = (delay: number) => {
+      timer = setTimeout(() => window.location.assign(signup), delay);
+    };
+    fetch(`${API_URL}/referrals/validate/${encodeURIComponent(code)}`)
+      .then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
+      .then((d) => {
+        if (!alive) return;
+        if (d?.valid) {
+          setState({ status: "valid", bonus: Number(d.bonusCredits) || 0 });
+          go(1600);
         } else {
-          setStatus("invalid");
-          setErrorMessage(data.message || "Invalid referral code");
-          // Redirect to home after showing error
-          setTimeout(() => {
-            router.push("/");
-          }, 3500);
+          setState({ status: "invalid" });
         }
-      } catch (error) {
-        console.error("Error validating referral:", error);
-        // Still store the code and redirect (validation will happen on signup)
-        if (typeof window !== "undefined") {
-          localStorage.setItem("referralCode", code);
-          document.cookie = `referralCode=${code}; path=/; max-age=${60 * 60 * 24 * 30}; SameSite=Lax`;
-        }
-        
-        setStatus("valid");
-        setTimeout(() => {
-          window.location.href = `${SIGNUP_URL}?ref=${code}`;
-        }, 2500);
-      }
-    }
-
-    if (code) {
-      validateAndRedirect();
-    }
-  }, [code, router]);
+      })
+      .catch(() => {
+        // Could not check the code: never lose it, the sign-up validates again.
+        if (alive) go(0);
+      });
+    return () => {
+      alive = false;
+      if (timer) clearTimeout(timer);
+    };
+  }, [code, signup]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-violet-950 via-slate-900 to-slate-950 flex items-center justify-center p-4">
-      <div className="max-w-md w-full">
-        {status === "validating" && (
-          <div className="text-center">
-            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-violet-500/20 mb-6">
-              <Loader2 className="w-10 h-10 text-violet-400 animate-spin" />
-            </div>
-            <h1 className="text-2xl font-bold text-white mb-2">
-              Validating your invite...
-            </h1>
-            <p className="text-slate-400">
-              Please wait while we verify your referral code
-            </p>
-          </div>
+    <div className="flex min-h-screen items-center justify-center bg-neutral-950 p-4 text-white">
+      <div className="w-full max-w-md text-center">
+        {state.status === "checking" && (
+          <>
+            <Loader2 className="mx-auto mb-6 h-8 w-8 animate-spin text-neutral-400" />
+            <h1 className="text-xl font-semibold">Checking your invite…</h1>
+          </>
         )}
 
-        {status === "valid" && (
-          <div className="text-center animate-in fade-in zoom-in duration-500">
-            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-green-500/20 mb-6 relative">
-              <CheckCircle className="w-10 h-10 text-green-400" />
-              <Sparkles className="w-6 h-6 text-yellow-400 absolute -top-1 -right-1 animate-pulse" />
+        {state.status === "valid" && (
+          <>
+            <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-white text-neutral-950">
+              <Gift className="h-7 w-7" />
             </div>
-            <h1 className="text-3xl font-bold text-white mb-3">
-              Welcome! 🎉
-            </h1>
-            <p className="text-slate-300 text-lg mb-4">
-              You have been invited to join Metigan!
-            </p>
-            <div className="bg-gradient-to-r from-violet-500/20 to-pink-500/20 border border-violet-500/30 rounded-xl p-6 mb-6">
-              <div className="flex items-center justify-center gap-3 mb-2">
-                <Gift className="w-6 h-6 text-violet-400" />
-                <span className="text-violet-300 font-medium">Referral Bonus</span>
-              </div>
-              <p className="text-4xl font-bold text-white mb-1">
-                +{bonusCredits}
+            <h1 className="text-3xl font-semibold tracking-tight">You&apos;ve been invited to Metigan</h1>
+            {state.bonus > 0 && (
+              <p className="mt-3 text-lg text-neutral-300">
+                Sign up and get <span className="font-semibold text-white">{new Intl.NumberFormat("en-US").format(state.bonus)} free credits</span>.
               </p>
-              <p className="text-slate-400 text-sm">
-                Free credits waiting for you!
-              </p>
-            </div>
-            <div className="flex items-center justify-center gap-2 text-slate-400">
-              <Loader2 className="w-4 h-4 animate-spin" />
-              <span>Redirecting to sign up...</span>
-            </div>
-          </div>
+            )}
+            <a
+              href={signup}
+              className="mt-8 inline-flex items-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-semibold text-neutral-950 transition-opacity hover:opacity-90"
+            >
+              Create your account
+              <ArrowRight className="h-4 w-4" />
+            </a>
+            <p className="mt-4 flex items-center justify-center gap-2 text-sm text-neutral-500">
+              <Loader2 className="h-3.5 w-3.5 animate-spin" />
+              Taking you there…
+            </p>
+          </>
         )}
 
-        {status === "invalid" && (
-          <div className="text-center animate-in fade-in zoom-in duration-500">
-            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-red-500/20 mb-6">
-              <XCircle className="w-10 h-10 text-red-400" />
-            </div>
-            <h1 className="text-2xl font-bold text-white mb-3">
-              Invalid Referral Code
-            </h1>
-            <p className="text-slate-400 mb-4">
-              {errorMessage || "This referral code is invalid or has expired."}
-            </p>
-            <p className="text-slate-500 text-sm flex items-center justify-center gap-2">
-              <Loader2 className="w-4 h-4 animate-spin" />
-              Redirecting to homepage...
-            </p>
-          </div>
+        {state.status === "invalid" && (
+          <>
+            <h1 className="text-2xl font-semibold tracking-tight">This invite is no longer active</h1>
+            <p className="mt-3 text-neutral-400">You can still create a free account — it only takes a minute.</p>
+            <a
+              href={SIGNUP_URL}
+              className="mt-8 inline-flex items-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-semibold text-neutral-950 transition-opacity hover:opacity-90"
+            >
+              Create your account
+              <ArrowRight className="h-4 w-4" />
+            </a>
+          </>
         )}
 
-        {/* Referral Code Display */}
-        <div className="mt-8 text-center">
-          <p className="text-slate-500 text-sm mb-1">Referral Code</p>
-          <p className="text-slate-300 font-mono text-lg tracking-wider">
-            {code}
+        {code && (
+          <p className="mt-10 font-mono text-xs tracking-widest text-neutral-600">
+            {code.toUpperCase()}
           </p>
-        </div>
+        )}
       </div>
     </div>
   );
 }
-
