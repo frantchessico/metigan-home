@@ -23,6 +23,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://metigan.io"),
   icons: {
     icon: [
+      { url: "/favicon.ico", sizes: "48x48" },
       { url: "/logo/favicon/favicon.svg", type: "image/svg+xml" },
       { url: "/logo/favicon/favicon-32.png", sizes: "32x32", type: "image/png" },
       { url: "/logo/favicon/favicon-16.png", sizes: "16x16", type: "image/png" },
