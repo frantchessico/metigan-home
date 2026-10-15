@@ -13,6 +13,7 @@ import "./globals.css"
 import Image from "next/image"
 import GoogleAnalytics from "@/components/GoogleAnalytics"
 import { Suspense } from "react"
+import { headers } from "next/headers"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -26,6 +27,9 @@ export default function RootLayout({
 }: {
   children: ReactNode
 }) {
+  // Set by middleware.ts while the site is not live: no header or footer.
+  const launching = headers().get("x-metigan-launching") === "1"
+
   return (
     // Adicionando a classe "dark" diretamente no elemento html
     <html lang="en" className="dark" suppressHydrationWarning>
@@ -37,6 +41,10 @@ export default function RootLayout({
       <body className={inter.className}>
         {/* Mantendo o ThemeProvider, mas com forcedTheme que será aplicado pelo provider */}
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} disableTransitionOnChange>
+          {launching ? (
+            <main>{children}</main>
+          ) : (
+          <>
           <div className="flex min-h-screen flex-col">
             <header className="sticky top-0 z-50 w-full">
               {/* Gradient border effect */}
@@ -89,8 +97,10 @@ export default function RootLayout({
 
             <main className="flex-1">{children}</main>
           </div>
-          <Toaster richColors={true} />
           <SiteFooter />
+          </>
+          )}
+          <Toaster richColors={true} />
         </ThemeProvider>
       </body>
     </html>
