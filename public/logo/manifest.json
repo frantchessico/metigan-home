@@ -1,0 +1,192 @@
+[
+ {
+  "id": "01",
+  "g": "Redes sociais",
+  "name": "Avatar · Night + brilho",
+  "dims": "1080×1080",
+  "dark": true,
+  "files": [
+   "exports/logo/social/avatar-night.png",
+   "exports/logo/social/avatar-night.svg"
+  ],
+  "preview": "exports/logo/social/avatar-night.svg"
+ },
+ {
+  "id": "02",
+  "g": "Redes sociais",
+  "name": "Avatar · Signal",
+  "dims": "1080×1080",
+  "dark": true,
+  "files": [
+   "exports/logo/social/avatar-signal.png",
+   "exports/logo/social/avatar-signal.svg"
+  ],
+  "preview": "exports/logo/social/avatar-signal.svg"
+ },
+ {
+  "id": "03",
+  "g": "Redes sociais",
+  "name": "Avatar · Paper",
+  "dims": "1080×1080",
+  "dark": false,
+  "files": [
+   "exports/logo/social/avatar-paper.png",
+   "exports/logo/social/avatar-paper.svg"
+  ],
+  "preview": "exports/logo/social/avatar-paper.svg"
+ },
+ {
+  "id": "04",
+  "g": "Redes sociais",
+  "name": "Avatar · Amber (campanhas)",
+  "dims": "1080×1080",
+  "dark": false,
+  "files": [
+   "exports/logo/social/avatar-amber.png",
+   "exports/logo/social/avatar-amber.svg"
+  ],
+  "preview": "exports/logo/social/avatar-amber.svg"
+ },
+ {
+  "id": "05",
+  "g": "Redes sociais",
+  "name": "Capa X · 1500×500",
+  "dims": "1500×500",
+  "dark": true,
+  "files": [
+   "exports/logo/social/x-header.png",
+   "exports/logo/social/x-header.svg"
+  ],
+  "preview": "exports/logo/social/x-header.svg"
+ },
+ {
+  "id": "06",
+  "g": "Redes sociais",
+  "name": "Capa LinkedIn · 1584×396",
+  "dims": "1584×396",
+  "dark": true,
+  "files": [
+   "exports/logo/social/linkedin-banner.png",
+   "exports/logo/social/linkedin-banner.svg"
+  ],
+  "preview": "exports/logo/social/linkedin-banner.svg"
+ },
+ {
+  "id": "07",
+  "g": "Redes sociais",
+  "name": "Open Graph · 1200×630",
+  "dims": "1200×630",
+  "dark": true,
+  "files": [
+   "exports/logo/social/og-image.png"
+  ],
+  "preview": "exports/logo/social/og-image.png"
+ },
+ {
+  "id": "08",
+  "g": "Website",
+  "name": "Logo horizontal · branco",
+  "dims": "1200×300",
+  "dark": true,
+  "files": [
+   "exports/logo/web/logo-horizontal-white.png",
+   "exports/logo/web/logo-horizontal-white-2x.png",
+   "exports/logo/web/logo-horizontal-white.svg"
+  ],
+  "preview": "exports/logo/web/logo-horizontal-white.svg"
+ },
+ {
+  "id": "09",
+  "g": "Website",
+  "name": "Logo horizontal · Night",
+  "dims": "1200×300",
+  "dark": false,
+  "files": [
+   "exports/logo/web/logo-horizontal-night.png",
+   "exports/logo/web/logo-horizontal-night-2x.png",
+   "exports/logo/web/logo-horizontal-night.svg"
+  ],
+  "preview": "exports/logo/web/logo-horizontal-night.svg"
+ },
+ {
+  "id": "10",
+  "g": "Website",
+  "name": "Logo vertical · branco",
+  "dims": "800×800",
+  "dark": true,
+  "files": [
+   "exports/logo/web/logo-vertical-white.png",
+   "exports/logo/web/logo-vertical-white-2x.png",
+   "exports/logo/web/logo-vertical-white.svg"
+  ],
+  "preview": "exports/logo/web/logo-vertical-white.svg"
+ },
+ {
+  "id": "11",
+  "g": "Website",
+  "name": "Logo vertical · Night",
+  "dims": "800×800",
+  "dark": false,
+  "files": [
+   "exports/logo/web/logo-vertical-night.png",
+   "exports/logo/web/logo-vertical-night-2x.png",
+   "exports/logo/web/logo-vertical-night.svg"
+  ],
+  "preview": "exports/logo/web/logo-vertical-night.svg"
+ },
+ {
+  "id": "12",
+  "g": "Website",
+  "name": "Símbolo · branco",
+  "dims": "800×800",
+  "dark": true,
+  "files": [
+   "exports/logo/web/symbol-white.png",
+   "exports/logo/web/symbol-white-2x.png",
+   "exports/logo/web/symbol-white.svg"
+  ],
+  "preview": "exports/logo/web/symbol-white.svg"
+ },
+ {
+  "id": "13",
+  "g": "Website",
+  "name": "Símbolo · Night",
+  "dims": "800×800",
+  "dark": false,
+  "files": [
+   "exports/logo/web/symbol-night.png",
+   "exports/logo/web/symbol-night-2x.png",
+   "exports/logo/web/symbol-night.svg"
+  ],
+  "preview": "exports/logo/web/symbol-night.svg"
+ },
+ {
+  "id": "14",
+  "g": "Favicon",
+  "name": "Favicon · 16, 32, 48, 96 + SVG",
+  "dims": "96×96",
+  "dark": true,
+  "files": [
+   "exports/logo/favicon/favicon-16.png",
+   "exports/logo/favicon/favicon-32.png",
+   "exports/logo/favicon/favicon-48.png",
+   "exports/logo/favicon/favicon-96.png",
+   "exports/logo/favicon/favicon.svg"
+  ],
+  "preview": "exports/logo/favicon/favicon.svg"
+ },
+ {
+  "id": "15",
+  "g": "Favicon",
+  "name": "App icon · 180 (Apple) + 192/512 (Android)",
+  "dims": "512×512",
+  "dark": true,
+  "files": [
+   "exports/logo/favicon/app-icon-180.png",
+   "exports/logo/favicon/app-icon-192.png",
+   "exports/logo/favicon/app-icon-512.png",
+   "exports/logo/favicon/app-icon.svg"
+  ],
+  "preview": "exports/logo/favicon/app-icon.svg"
+ }
+]

@@ -20,6 +20,22 @@ const inter = Inter({ subsets: ["latin"] })
 export const metadata: Metadata = {
   title: "Metigan - Mass Email Service",
   description: "Professional email marketing and mass email sending service",
+  metadataBase: new URL("https://metigan.io"),
+  icons: {
+    icon: [
+      { url: "/logo/favicon/favicon.svg", type: "image/svg+xml" },
+      { url: "/logo/favicon/favicon-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/logo/favicon/favicon-16.png", sizes: "16x16", type: "image/png" },
+    ],
+    apple: "/logo/favicon/app-icon-180.png",
+  },
+  openGraph: {
+    images: [{ url: "/logo/social/og-image.png", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/logo/social/og-image.png"],
+  },
 }
 
 export default function RootLayout({
